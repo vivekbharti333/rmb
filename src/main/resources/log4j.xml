@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+    <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d{dd MMM yyyy HH:mm:ss,SSS} -[%t]-[%X{X-Accounts-RequestId}]- %5p - %C{1}.%M(%L) - %m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="ROLLINGFILE" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="${log4j.file}"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d{dd MMM yyyy HH:mm:ss,SSS} -[%t]-[%X{X-Accounts-RequestId}]- %5p - %C{1}.%M(%L) - %m%n"/>
+        </layout>
+    </appender>
+
+
+    <logger name="com.xpos">
+        <level value="ALL"/>
+    </logger>
+
+	<!--<category name="org.hibernate">
+		<priority value="DEBUG" />
+	</category>-->
+	
+    <root>
+        <level value="ERROR"/>
+        <appender-ref ref="${log4j.appender}"/>
+    </root>
+
+</log4j:configuration>

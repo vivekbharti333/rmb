@@ -1,0 +1,6 @@
+package com.Xposindia.enums;
+
+public enum UserRole {
+
+	SUPERADMIN,ADMIN,AGENT,CUSTOMER,VERIFIER,TELEVERIFIER,TELEMARKETER,CAFADMIN;
+}

@@ -1,0 +1,9 @@
+package com.Xposindia.enums;
+
+public enum RequestFor {
+	REGISTRATION,
+	LOGINVERIFICATION,
+	RESETPASSWORDVERIFICATION,
+	UPDATEUSERPROFILE,
+	
+}

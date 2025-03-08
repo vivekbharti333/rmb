@@ -64,11 +64,24 @@ public class UserController
 	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public String test() throws Exception {
 		
-		String hi = commonHelper.getJsonString();
-		System.out.println(hi);
-		String pocResp = commonHelper.interaktApi(hi);
+//		String hi = commonHelper.getJsonString();
 		
-		System.out.println("response : "+pocResp);
+//		String pocResp = commonHelper.interaktApi(hi);
+		
+//		System.out.println("response : "+pocResp);
+		
+		BookingDetails bookingDetails= new BookingDetails();
+		
+		bookingDetails.setVehicleType("CAR");
+		bookingDetails.setCustomerName("Vivek Bharti");
+		bookingDetails.setCustomerMobile("8800689752");
+		
+//		String hi = commonHelper.getJsonString(bookingDetails);
+		
+//		System.out.println("Response : "+hi);
+		
+		
+//		String hhi = commonHelper.forAdditonalServices(null);
 
 		return "Great..! it's Working...";
 	}

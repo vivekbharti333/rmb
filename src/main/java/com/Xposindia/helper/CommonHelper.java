@@ -622,58 +622,94 @@ public String forSchedular(BookingDetails bookingDetails) throws Exception {
 
 
 
+    public static String getJsonStringtesting() throws JSONException {
+    	System.out.println("Enter");
+    	
+        String[] bodyValues = { "test1" ,"Test2", "test3" };
+//        String[] carouselCards = {};
+        
+    	
+        // Create the main JSON object
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("countryCode", "+91");
+        jsonObject.put("phoneNumber", "8800689752");
+        jsonObject.put("callbackData", "some text here");
+        jsonObject.put("type", "Template");
 
-public String getJsonString() throws JSONException {
-    // Create the main JSON object
-    JSONObject jsonObject = new JSONObject();
-    jsonObject.put("countryCode", "+91");
-    jsonObject.put("phoneNumber", "8800689752");
-    jsonObject.put("callbackData", "some text here");
-    jsonObject.put("type", "Template");
+        // Create the "template" object
+        JSONObject template = new JSONObject();
+        template.put("name", "myraanpromo2");
+        template.put("languageCode", "en");
+        template.put("bodyValues", bodyValues); // Directly add JSONArray, not as a string
 
-    // Create the "template" object
-    JSONObject template = new JSONObject();
-    template.put("name", "myraanpromo2");
-    template.put("languageCode", "en");
+        // Add "carouselCards" array
+        JSONArray carouselCards = new JSONArray();
 
-    // Add "bodyValues" array
-    JSONArray bodyValues = new JSONArray();
-    bodyValues.put("test1");
-    bodyValues.put("test2");
-    bodyValues.put("test3");
-    template.put("bodyValues", bodyValues);
+        // Add carousel card objects
+        String[] imageUrls = {
+            "https://interaktprodmediastorage.blob.core.windows.net/mediaprodstoragecontainer/7319ba4d-3517-4ace-bf06-1ed83448311d/message_template_media/KjNg6tbnhJ86/Casino.png?se=2030-02-20T08%3A31%3A39Z&sp=rt&sv=2019-12-12&sr=b&sig=FNtVaCGuaGV3FU66hKUYDtp69fj/8T0zupKuIsABl%2B4%3D",
+            "https://interaktprodmediastorage.blob.core.windows.net/mediaprodstoragecontainer/7319ba4d-3517-4ace-bf06-1ed83448311d/message_template_media/MxKjP1lkF2xG/Scuba%2002.png?se=2030-02-20T08%3A32%3A13Z&sp=rt&sv=2019-12-12&sr=b&sig=kh1d5ej4Q7K5%2BnWemyax690514r8a8as6imU%2BeFOYyU%3D",
+            "https://interaktprodmediastorage.blob.core.windows.net/mediaprodstoragecontainer/7319ba4d-3517-4ace-bf06-1ed83448311d/message_template_media/GP0ixuXoUG5L/Lux%20Dinner%20Cruise.png?se=2030-02-20T08%3A32%3A44Z&sp=rt&sv=2019-12-12&sr=b&sig=8l9xxg6rZ2hSY9zQo5WplEbX5YBb2ZCUgLsgxMaFRBk%3D",
+            "https://interaktprodmediastorage.blob.core.windows.net/mediaprodstoragecontainer/7319ba4d-3517-4ace-bf06-1ed83448311d/message_template_media/ZaT0lR79iqpp/bungee.png?se=2030-02-20T08%3A35%3A13Z&sp=rt&sv=2019-12-12&sr=b&sig=kzm3v9BbByEpk8WODOQ8H%2BEiaAGLRl5ANCDuQhblPEY%3D",
+            "https://interaktprodmediastorage.blob.core.windows.net/mediaprodstoragecontainer/7319ba4d-3517-4ace-bf06-1ed83448311d/message_template_media/DhB6LeWbSzy9/Watersport.png?se=2030-02-20T08%3A35%3A33Z&sp=rt&sv=2019-12-12&sr=b&sig=BI6E4XBX3xxy5fAHYwXUU3v82bswqsp4FIyafLueSDI%3D",
+            "https://interaktprodmediastorage.blob.core.windows.net/mediaprodstoragecontainer/7319ba4d-3517-4ace-bf06-1ed83448311d/message_template_media/srG9JKMQ6zKP/Dudhsagar.png?se=2030-02-20T08%3A35%3A54Z&sp=rt&sv=2019-12-12&sr=b&sig=prL1LWsIKaSAxHoBYhm22W0xT/Gjpkp9Esr470H26LI%3D",
+            "https://interaktprodmediastorage.blob.core.windows.net/mediaprodstoragecontainer/7319ba4d-3517-4ace-bf06-1ed83448311d/message_template_media/JLJY51RXhYo2/Private%20Yetch.png?se=2030-02-20T08%3A36%3A08Z&sp=rt&sv=2019-12-12&sr=b&sig=dCd5yhtYZF3IskIpNkh0uF%2BRpPhWBFqHGEwuhpGhSaM%3D",
+            "https://interaktprodmediastorage.blob.core.windows.net/mediaprodstoragecontainer/7319ba4d-3517-4ace-bf06-1ed83448311d/message_template_media/JiQLTeWa7FwJ/Adventure%20Boat%20Party.jpeg?se=2030-02-22T10%3A05%3A08Z&sp=rt&sv=2019-12-12&sr=b&sig=K0n7wP/X32AkMbBp6Onob1pEWk7qrBqHvhiZ4foGx6Y%3D",
+            "https://interaktprodmediastorage.blob.core.windows.net/mediaprodstoragecontainer/7319ba4d-3517-4ace-bf06-1ed83448311d/message_template_media/KxNr6MjHSu7C/Dolphin%20Trip.jpeg?se=2030-02-22T10%3A05%3A32Z&sp=rt&sv=2019-12-12&sr=b&sig=rs8ynTUoiPbvtohKfdH5Kra1IE8Fng1HRQyvF2Z3/zU%3D"
+        };
 
-    // Add "carouselCards" array
-    JSONArray carouselCards = new JSONArray();
+        for (String url : imageUrls) {
+            JSONObject card = new JSONObject();
+            JSONArray headerValues = new JSONArray();
+            headerValues.put("");
+            headerValues.put(url);
+            card.put("headerValues", headerValues); // Directly add JSONArray, not as a string
+            card.put("buttonValues", new JSONObject()); // Empty object
+            card.put("bodyValues", new JSONArray());   // Empty array
+            carouselCards.put(card); // Directly add JSONObject, not as a string
+        }
 
-    // Add carousel card objects
-    String[] imageUrls = {
-        "https://interaktprodmediastorage.blob.core.windows.net/mediaprodstoragecontainer/7319ba4d-3517-4ace-bf06-1ed83448311d/message_template_media/KjNg6tbnhJ86/Casino.png?se=2030-02-20T08%3A31%3A39Z&sp=rt&sv=2019-12-12&sr=b&sig=FNtVaCGuaGV3FU66hKUYDtp69fj/8T0zupKuIsABl%2B4%3D",
-        "https://interaktprodmediastorage.blob.core.windows.net/mediaprodstoragecontainer/7319ba4d-3517-4ace-bf06-1ed83448311d/message_template_media/MxKjP1lkF2xG/Scuba%2002.png?se=2030-02-20T08%3A32%3A13Z&sp=rt&sv=2019-12-12&sr=b&sig=kh1d5ej4Q7K5%2BnWemyax690514r8a8as6imU%2BeFOYyU%3D",
-        "https://interaktprodmediastorage.blob.core.windows.net/mediaprodstoragecontainer/7319ba4d-3517-4ace-bf06-1ed83448311d/message_template_media/GP0ixuXoUG5L/Lux%20Dinner%20Cruise.png?se=2030-02-20T08%3A32%3A44Z&sp=rt&sv=2019-12-12&sr=b&sig=8l9xxg6rZ2hSY9zQo5WplEbX5YBb2ZCUgLsgxMaFRBk%3D",
-        "https://interaktprodmediastorage.blob.core.windows.net/mediaprodstoragecontainer/7319ba4d-3517-4ace-bf06-1ed83448311d/message_template_media/ZaT0lR79iqpp/bungee.png?se=2030-02-20T08%3A35%3A13Z&sp=rt&sv=2019-12-12&sr=b&sig=kzm3v9BbByEpk8WODOQ8H%2BEiaAGLRl5ANCDuQhblPEY%3D",
-        "https://interaktprodmediastorage.blob.core.windows.net/mediaprodstoragecontainer/7319ba4d-3517-4ace-bf06-1ed83448311d/message_template_media/DhB6LeWbSzy9/Watersport.png?se=2030-02-20T08%3A35%3A33Z&sp=rt&sv=2019-12-12&sr=b&sig=BI6E4XBX3xxy5fAHYwXUU3v82bswqsp4FIyafLueSDI%3D",
-        "https://interaktprodmediastorage.blob.core.windows.net/mediaprodstoragecontainer/7319ba4d-3517-4ace-bf06-1ed83448311d/message_template_media/srG9JKMQ6zKP/Dudhsagar.png?se=2030-02-20T08%3A35%3A54Z&sp=rt&sv=2019-12-12&sr=b&sig=prL1LWsIKaSAxHoBYhm22W0xT/Gjpkp9Esr470H26LI%3D",
-        "https://interaktprodmediastorage.blob.core.windows.net/mediaprodstoragecontainer/7319ba4d-3517-4ace-bf06-1ed83448311d/message_template_media/JLJY51RXhYo2/Private%20Yetch.png?se=2030-02-20T08%3A36%3A08Z&sp=rt&sv=2019-12-12&sr=b&sig=dCd5yhtYZF3IskIpNkh0uF%2BRpPhWBFqHGEwuhpGhSaM%3D",
-        "https://interaktprodmediastorage.blob.core.windows.net/mediaprodstoragecontainer/7319ba4d-3517-4ace-bf06-1ed83448311d/message_template_media/JiQLTeWa7FwJ/Adventure%20Boat%20Party.jpeg?se=2030-02-22T10%3A05%3A08Z&sp=rt&sv=2019-12-12&sr=b&sig=K0n7wP/X32AkMbBp6Onob1pEWk7qrBqHvhiZ4foGx6Y%3D",
-        "https://interaktprodmediastorage.blob.core.windows.net/mediaprodstoragecontainer/7319ba4d-3517-4ace-bf06-1ed83448311d/message_template_media/KxNr6MjHSu7C/Dolphin%20Trip.jpeg?se=2030-02-22T10%3A05%3A32Z&sp=rt&sv=2019-12-12&sr=b&sig=rs8ynTUoiPbvtohKfdH5Kra1IE8Fng1HRQyvF2Z3/zU%3D"
-    };
+        template.put("carouselCards", carouselCards); // Directly add JSONArray, not as a string
+        jsonObject.put("template", template); // Directly add JSONObject, not as a string
 
-    for (String url : imageUrls) {
-        JSONObject card = new JSONObject();
-        JSONArray headerValues = new JSONArray();
-        headerValues.put(url);
-        card.put("headerValues", headerValues);
-        card.put("buttonValues", new JSONObject()); // Empty object
-        card.put("bodyValues", new JSONArray());   // Empty array
-        carouselCards.put(card);
+        // Convert the JSON object to a string
+        return jsonObject.toString(4); // Pretty-print with 4 spaces indentation
     }
 
-    template.put("carouselCards", carouselCards);
-    jsonObject.put("template", template);
 
-    // Convert the JSON object to a string
-    return jsonObject.toString(4); 
+
+public String forAdditonalServices(BookingDetails bookingDetails) throws JSONException, IOException {
+	
+	String vartwo = "";
+	String varthree = "";
+	if(bookingDetails.getVehicleType().equals("CAR")) {
+//		vehicleType = "EZEE CAR RENT";
+		vartwo = "MYRAAN RENTALS & ADVENTURES GOA!";
+		varthree = "Dinner Cruises, Water Sports & Adventure Trips in Goa!";
+		
+	}else if(bookingDetails.getVehicleType().equals("BIKE")) {
+//		vehicleType = "RENT MY BIKE";
+		vartwo = "MYRAAN RENTALS & ADVENTURES GOA! ";
+		varthree = "Dinner Cruises, Water Sports & Adventure Trips in Goa!";
+		
+	}else {
+		vartwo = "AQUA ADVENTURE GOA!";
+		varthree = "Self-Drive Car or Bike Rental Services in Goa!";
+	}
+	
+	OkHttpClient client = new OkHttpClient().newBuilder()
+			  .build();
+			MediaType mediaType = MediaType.parse("application/json");
+			RequestBody body = RequestBody.create(mediaType, "{\r\n    \"countryCode\": \"+91\",\r\n    \"phoneNumber\": \""+bookingDetails.getCustomerMobile()+"\",\r\n    \"callbackData\": \"some text here\",\r\n    \"type\": \"Template\",\r\n    \"template\": {\r\n        \"name\": \"myraanpromo2\",\r\n        \"languageCode\": \"en\",\r\n        \"bodyValues\": [\r\n            \""+bookingDetails.getCustomerName()+"\",\r\n            \""+vartwo+"\",\r\n            \""+varthree+"\"\r\n        ],\r\n        \"carouselCards\": [\r\n            {\r\n                \"headerValues\": [\r\n                    \"https://interaktprodmediastorage.blob.core.windows.net/mediaprodstoragecontainer/7319ba4d-3517-4ace-bf06-1ed83448311d/message_template_media/KjNg6tbnhJ86/Casino.png?se=2030-02-20T08%3A31%3A39Z&sp=rt&sv=2019-12-12&sr=b&sig=FNtVaCGuaGV3FU66hKUYDtp69fj/8T0zupKuIsABl%2B4%3D\"\r\n                ],\r\n                \"buttonValues\": {},\r\n                \"bodyValues\": []\r\n            },\r\n            {\r\n                \"headerValues\": [\r\n                    \"https://interaktprodmediastorage.blob.core.windows.net/mediaprodstoragecontainer/7319ba4d-3517-4ace-bf06-1ed83448311d/message_template_media/MxKjP1lkF2xG/Scuba%2002.png?se=2030-02-20T08%3A32%3A13Z&sp=rt&sv=2019-12-12&sr=b&sig=kh1d5ej4Q7K5%2BnWemyax690514r8a8as6imU%2BeFOYyU%3D\"\r\n                ],\r\n                \"buttonValues\": {},\r\n                \"bodyValues\": []\r\n                \r\n            },\r\n            {\r\n                \"headerValues\": [\r\n                    \"https://interaktprodmediastorage.blob.core.windows.net/mediaprodstoragecontainer/7319ba4d-3517-4ace-bf06-1ed83448311d/message_template_media/GP0ixuXoUG5L/Lux%20Dinner%20Cruise.png?se=2030-02-20T08%3A32%3A44Z&sp=rt&sv=2019-12-12&sr=b&sig=8l9xxg6rZ2hSY9zQo5WplEbX5YBb2ZCUgLsgxMaFRBk%3D\"\r\n                ],\r\n                \"buttonValues\": {},\r\n                \"bodyValues\": []\r\n            },\r\n            {\r\n                \"headerValues\": [\r\n                    \"https://interaktprodmediastorage.blob.core.windows.net/mediaprodstoragecontainer/7319ba4d-3517-4ace-bf06-1ed83448311d/message_template_media/ZaT0lR79iqpp/bungee.png?se=2030-02-20T08%3A35%3A13Z&sp=rt&sv=2019-12-12&sr=b&sig=kzm3v9BbByEpk8WODOQ8H%2BEiaAGLRl5ANCDuQhblPEY%3D\"\r\n                ],\r\n                \"buttonValues\": {},\r\n                \"bodyValues\": []\r\n            },\r\n            {\r\n                \"headerValues\": [\r\n                    \"https://interaktprodmediastorage.blob.core.windows.net/mediaprodstoragecontainer/7319ba4d-3517-4ace-bf06-1ed83448311d/message_template_media/DhB6LeWbSzy9/Watersport.png?se=2030-02-20T08%3A35%3A33Z&sp=rt&sv=2019-12-12&sr=b&sig=BI6E4XBX3xxy5fAHYwXUU3v82bswqsp4FIyafLueSDI%3D\"\r\n                ],\r\n                \"buttonValues\": {},\r\n                \"bodyValues\": []\r\n            },\r\n            {\r\n                \"headerValues\": [\r\n                    \"https://interaktprodmediastorage.blob.core.windows.net/mediaprodstoragecontainer/7319ba4d-3517-4ace-bf06-1ed83448311d/message_template_media/srG9JKMQ6zKP/Dudhsagar.png?se=2030-02-20T08%3A35%3A54Z&sp=rt&sv=2019-12-12&sr=b&sig=prL1LWsIKaSAxHoBYhm22W0xT/Gjpkp9Esr470H26LI%3D\"\r\n                ],\r\n                \"buttonValues\": {},\r\n                \"bodyValues\": []\r\n            },\r\n            {\r\n                \"headerValues\": [\r\n                    \"https://interaktprodmediastorage.blob.core.windows.net/mediaprodstoragecontainer/7319ba4d-3517-4ace-bf06-1ed83448311d/message_template_media/JLJY51RXhYo2/Private%20Yetch.png?se=2030-02-20T08%3A36%3A08Z&sp=rt&sv=2019-12-12&sr=b&sig=dCd5yhtYZF3IskIpNkh0uF%2BRpPhWBFqHGEwuhpGhSaM%3D\"\r\n                ],\r\n                \"buttonValues\": {},\r\n                \"bodyValues\": []\r\n            },\r\n            {\r\n                \"headerValues\": [\r\n                    \"https://interaktprodmediastorage.blob.core.windows.net/mediaprodstoragecontainer/7319ba4d-3517-4ace-bf06-1ed83448311d/message_template_media/JiQLTeWa7FwJ/Adventure%20Boat%20Party.jpeg?se=2030-02-22T10%3A05%3A08Z&sp=rt&sv=2019-12-12&sr=b&sig=K0n7wP/X32AkMbBp6Onob1pEWk7qrBqHvhiZ4foGx6Y%3D\"\r\n                ],\r\n                \"buttonValues\": {},\r\n                \"bodyValues\": []\r\n            },\r\n            {\r\n                \"headerValues\": [\r\n                    \"https://interaktprodmediastorage.blob.core.windows.net/mediaprodstoragecontainer/7319ba4d-3517-4ace-bf06-1ed83448311d/message_template_media/KxNr6MjHSu7C/Dolphin%20Trip.jpeg?se=2030-02-22T10%3A05%3A32Z&sp=rt&sv=2019-12-12&sr=b&sig=rs8ynTUoiPbvtohKfdH5Kra1IE8Fng1HRQyvF2Z3/zU%3D\"\r\n                ],\r\n                \"buttonValues\": {},\r\n                \"bodyValues\": []\r\n            }\r\n        ]\r\n    }\r\n}");
+			Request request = new Request.Builder()
+			  .url("https://api.interakt.ai/v1/public/message/")
+			  .method("POST", body)
+			  .addHeader("Authorization", "Basic dUNkRHc1R01pUlVnaHAtMUx4elAxb2EyamZaT2o2eWtLcjJwYnUzNnlBRTo=")
+			  .addHeader("Content-Type", "application/json")
+			  .build();
+			Response response = client.newCall(request).execute();
+			return response.toString();
+			 
 }
 
 
@@ -682,7 +718,7 @@ public String getJsonString() throws JSONException {
 
 
 
-public String forAdditonalServices(BookingDetails bookingDetails) throws Exception {
+public String forAdditonalServicesOldhai(BookingDetails bookingDetails) throws Exception {
 	
 	String customerName = bookingDetails.getCustomerName();
     String[] firstName = customerName.split(" ");

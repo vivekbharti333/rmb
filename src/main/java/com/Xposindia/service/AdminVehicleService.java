@@ -288,22 +288,34 @@ public class AdminVehicleService {
 					}
 				}
 			}else if (vehicleRequest.getType().equals("ADDSERVICES")) {
-				System.out.println("Enter 1");
+				System.out.println("Enter 1" +vehicleRequest.getFromDate()+" , "+vehicleRequest.getToDate());
 				for (BookingDetails existsBooking : bookingDetails) {
 					if (existsBooking.getVehicleType().equals("CAR")) {
-						System.out.println("Enter : "+existsBooking.getVehicleType());
+						System.out.println(" Car existsBooking : "+existsBooking.getId());
+//						System.out.println("Enter : "+existsBooking.getVehicleType());
 						String addServices = commonHelper.forAdditonalServices(existsBooking);
-						String pocResp = commonHelper.interaktApi(addServices);
+//						String pocResp = commonHelper.interaktApi(addServices);
 						
 						System.out.println("Request : "+addServices);
-						System.out.println("Res car :  "+pocResp);
-					}
+//						System.out.println("Res car :  "+pocResp);
+					} else
 					if (existsBooking.getVehicleType().equals("BIKE")) {
+						
+						System.out.println(" Bike existsBooking : "+existsBooking.getId());
+						
 						String addServices = commonHelper.forAdditonalServices(existsBooking);
-						String pocResp = commonHelper.interaktApi(addServices);
+//						String pocResp = commonHelper.interaktApi(addServices);
 						
 						System.out.println("resp :  "+addServices);
-						System.out.println("Bike :  "+pocResp);
+//						System.out.println("Bike :  "+pocResp);
+					} else  {
+						String addServices = commonHelper.forAdditonalServices(existsBooking);
+//						String pocResp = commonHelper.interaktApi(addServices);
+						
+						System.out.println(" Water existsBooking : "+existsBooking.getId());
+						
+						System.out.println("resp :  "+addServices);
+//						System.out.println("Bike :  "+pocResp);
 					}
 				}
 			}

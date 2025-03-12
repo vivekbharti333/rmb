@@ -289,7 +289,7 @@ public List<BookingDetails> getBookingDetailsForCall(VehicleRequestObject bookin
 	      Date backMonth = Date.from(todayDate.toInstant().minus(30L, ChronoUnit.DAYS));
 
 	      List<BookingDetails> results = this.bookingDetailsDao.getEntityManager()
-	        		 .createQuery("SELECT UD FROM BookingDetails UD where UD.status IN (:REQUESTED,:BOOKED) AND UD.callStatus NOT IN(:callStatus) ORDER BY UD.fromDate ASC")
+	        		 .createQuery("SELECT UD FROM BookingDetails UD where UD.status IN (:REQUESTED,:BOOKED) AND UD.callStatus NOT IN(:callStatus)  OR UD.callStatus IS NULL ORDER BY UD.fromDate ASC")
 	        		 .setParameter("REQUESTED", "REQUESTED")
 	        		 .setParameter("BOOKED", "BOOKED")
 	        		 .setParameter("callStatus", "CALL_DONE")

@@ -287,19 +287,33 @@ public List<BookingDetails> getBookingDetailsForCall(VehicleRequestObject bookin
 	      Date todayDate = new Date();
 	      Date nextDay = Date.from(todayDate.toInstant().plus(1L, ChronoUnit.DAYS));
 	      Date backMonth = Date.from(todayDate.toInstant().minus(30L, ChronoUnit.DAYS));
-
+	      
+	      
 	      List<BookingDetails> results = this.bookingDetailsDao.getEntityManager()
-	        		 .createQuery("SELECT UD FROM BookingDetails UD where UD.status IN (:REQUESTED,:BOOKED) AND UD.callStatus NOT IN(:callStatus)  OR UD.callStatus IS NULL ORDER BY UD.fromDate ASC")
-	        		 .setParameter("REQUESTED", "REQUESTED")
-	        		 .setParameter("BOOKED", "BOOKED")
-	        		 .setParameter("callStatus", "CALL_DONE")
-//	        		 .setParameter("empity", "")
-//	        		 .setParameter("currentDate", new Date(), TemporalType.DATE)
-//	        		 .setParameter("lastDate", nextDay, TemporalType.DATE)
-//	        		 .setFirstResult(0).setMaxResults(300)
-	        		 .getResultList();
-	         return results;
-	      } 
+	  		    .createQuery("SELECT UD FROM BookingDetails UD WHERE UD.status IN (:REQUESTED, :BOOKED) AND (UD.callStatus NOT IN (:callStatus) OR UD.callStatus IS NULL) " +
+	  		                 "ORDER BY UD.fromDate ASC", BookingDetails.class)
+	  		    .setParameter("REQUESTED", "REQUESTED")
+	  		    .setParameter("BOOKED", "BOOKED")
+	  		    .setParameter("callStatus", "CALL_DONE")
+//	  		    .setFirstResult(0).setMaxResults(300)
+	  		    .getResultList();
+	  
+	  		return results;
+	    }
+
+
+//	      List<BookingDetails> results = this.bookingDetailsDao.getEntityManager()
+//	        		 .createQuery("SELECT UD FROM BookingDetails UD where UD.status IN (:REQUESTED,:BOOKED) AND UD.callStatus NOT IN(:callStatus) OR UD.callStatus IS NULL ORDER BY UD.fromDate ASC")
+//	        		 .setParameter("REQUESTED", "REQUESTED")
+//	        		 .setParameter("BOOKED", "BOOKED")
+//	        		 .setParameter("callStatus", "CALL_DONE")
+////	        		 .setParameter("empity", "")
+////	        		 .setParameter("currentDate", new Date(), TemporalType.DATE)
+////	        		 .setParameter("lastDate", nextDay, TemporalType.DATE)
+////	        		 .setFirstResult(0).setMaxResults(300)
+//	        		 .getResultList();
+//	         return results;
+//	      } 
 	
 
 

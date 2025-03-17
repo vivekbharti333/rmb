@@ -114,7 +114,6 @@ public class WebBookingController
         
         WebBookingDetails bookingDetails = webBookingHelper.getVehicleDetailsByInvoiceNumber(razorpayPaymentLinkReferenceId);
         
-        System.out.println("enter 1");
         
         if(bookingDetails != null ) {
         	

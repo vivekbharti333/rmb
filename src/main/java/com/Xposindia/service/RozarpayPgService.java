@@ -72,7 +72,7 @@ public class RozarpayPgService {
 		paymentLinkRequest.put("reminder_enable",true);
 //		paymentLinkRequest.put("callback_url","http://localhost:4200/#/payments/payment-success");
 //		paymentLinkRequest.put("callback_url","http://localhost:8080/vehicle/razorpay/callback");
-		paymentLinkRequest.put("callback_url","http://65.108.75.119:6080/vehicle/razorpay/callback");
+		paymentLinkRequest.put("callback_url","https://romeyourway.com/payment-success");
 		paymentLinkRequest.put("callback_method","get");
 		              
 		PaymentLink payment = razorpay.paymentLink.create(paymentLinkRequest);

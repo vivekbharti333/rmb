@@ -64,6 +64,7 @@ public class WebBookingHelper {
 		WebBookingDetails bookingDetails = new WebBookingDetails();
 
 		bookingDetails.setBookingId(StringUtils.substring(RandomStringUtils.random(64, false, true), 0, 16));
+		bookingDetails.setTransportType(vehicleRequest.getTransportType());
 		bookingDetails.setVehicleType(vehicleRequest.getVehicleType());
 		bookingDetails.setVehicleDetailsType(vehicleRequest.getVehicleDetailsType());
 		bookingDetails.setVehicleBrand(vehicleRequest.getVehicleBrand());
@@ -85,14 +86,15 @@ public class WebBookingHelper {
 		
 //		bookingDetails.setArrivalType(vehicleRequest.getArrivalType());
 //		bookingDetails.setOnlineNotes(vehicleRequest.getOnlineNotes());
-//		bookingDetails.setNoOfChild(vehicleRequest.getNoOfChild());
-//		bookingDetails.setAmountForChild(vehicleRequest.getAmountForChild());
-//		bookingDetails.setTotalAmountForChild(vehicleRequest.getTotalAmountForChild());
-//		bookingDetails.setNoOfAdult(vehicleRequest.getNoOfAdult());
-//		bookingDetails.setAmountForAdult(vehicleRequest.getAmountForAdult());
-//		bookingDetails.setTotalNoOfPerson(vehicleRequest.getTotalNoOfPerson());
-//		bookingDetails.setPaymentType(vehicleRequest.getPaymentType());
+		bookingDetails.setNoOfChild(vehicleRequest.getNoOfChild());
+		bookingDetails.setAmountForChild(vehicleRequest.getAmountForChild());
+		bookingDetails.setTotalAmountForChild(vehicleRequest.getTotalAmountForChild());
+		bookingDetails.setNoOfAdult(vehicleRequest.getNoOfAdult());
+		bookingDetails.setAmountForAdult(vehicleRequest.getAmountForAdult());
+		bookingDetails.setTotalNoOfPerson(vehicleRequest.getTotalNoOfPerson());
+		bookingDetails.setPaymentType(vehicleRequest.getPaymentType());
 //		bookingDetails.setInvoiceNumber(vehicleRequest.getInvoiceNumber());
+		bookingDetails.setTotalPayableAmount(vehicleRequest.getTotalPayableAmount());
 		
 		return bookingDetails;
 	}

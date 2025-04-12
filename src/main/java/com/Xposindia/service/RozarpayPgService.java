@@ -50,10 +50,10 @@ public class RozarpayPgService {
 		
 		
 //		RazorpayClient razorpay = new RazorpayClient("rzp_test_KiREBJNBMR41TP", "It78jFUUZQZl7f3d6I6iUAI2");
-		RazorpayClient razorpay = new RazorpayClient("rzp_live_1NvgMPNciEM6Mu", "8jlIK1X0mkITb0GlKh2sqCKs");
+		RazorpayClient razorpay = new RazorpayClient("rzp_live_udlCDMeLep9nk2", "S0z7n1X96xlkCKURtlxmqoGn");
 		JSONObject paymentLinkRequest = new JSONObject();
 		paymentLinkRequest.put("amount", vehicleRequest.getTotalAmount());
-//		paymentLinkRequest.put("amount", vehicleRequest.getTotalAmount();
+//		paymentLinkRequest.put("amount", 1.00);
 		paymentLinkRequest.put("currency","INR");
 		paymentLinkRequest.put("accept_partial",false);
 //		paymentLinkRequest.put("first_min_partial_amount",0);

@@ -47,6 +47,7 @@ public class VehicleRequestObject {
 	private String memberType;
 	private String type;
 	
+	private String transportType;
 	private String customerMobile;
 	private String countryCode;
 	private String customerName;
@@ -116,6 +117,8 @@ public class VehicleRequestObject {
 	private Long weeklyCount;
 	private Long halfMonthCount;
 	private Long monthlyCount;
+	
+	private int totalPayableAmount;
 	
 	private String receiptNumber;
 	private String receiptStatus;
@@ -571,6 +574,12 @@ public class VehicleRequestObject {
 	public void setCancelByName(String cancelByName) {
 		this.cancelByName = cancelByName;
 	}
+	public String getTransportType() {
+		return transportType;
+	}
+	public void setTransportType(String transportType) {
+		this.transportType = transportType;
+	}
 	public String getAdminId() {
 		return adminId;
 	}
@@ -882,6 +891,12 @@ public class VehicleRequestObject {
 	}
 	public void setDateType(String dateType) {
 		this.dateType = dateType;
+	}
+	public int getTotalPayableAmount() {
+		return totalPayableAmount;
+	}
+	public void setTotalPayableAmount(int totalPayableAmount) {
+		this.totalPayableAmount = totalPayableAmount;
 	}
 
 

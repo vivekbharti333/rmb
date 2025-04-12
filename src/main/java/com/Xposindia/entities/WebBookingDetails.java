@@ -30,6 +30,9 @@ public class WebBookingDetails {
 	@Column(name = "vehicle_name")
 	private String vehicleName;
 	
+	@Column(name = "transport_type")
+	private String transportType;
+	
 	@Column(name = "vehicle_quantity")
 	private int vehicleQuantity;
 	
@@ -47,6 +50,9 @@ public class WebBookingDetails {
 	
 	@Column(name = "total_amount")
 	private int totalAmount;
+	
+	@Column(name = "total_payable_amount")
+	private int totalPayableAmount;
 	
 	@Column(name = "created_by")
 	private String createdBy;
@@ -325,18 +331,37 @@ public class WebBookingDetails {
 		this.updatedAt = updatedAt;
 	}
 
+	public String getTransportType() {
+		return transportType;
+	}
+
+	public void setTransportType(String transportType) {
+		this.transportType = transportType;
+	}
+
+	public int getTotalPayableAmount() {
+		return totalPayableAmount;
+	}
+
+	public void setTotalPayableAmount(int totalPayableAmount) {
+		this.totalPayableAmount = totalPayableAmount;
+	}
+
 	@Override
 	public String toString() {
 		return "WebBookingDetails [id=" + id + ", vehicleDetailsType=" + vehicleDetailsType + ", vehicleType="
-				+ vehicleType + ", vehicleBrand=" + vehicleBrand + ", vehicleName=" + vehicleName + ", vehicleQuantity="
-				+ vehicleQuantity + ", countryCode=" + countryCode + ", customerMobile=" + customerMobile
-				+ ", customerName=" + customerName + ", fromDate=" + fromDate + ", totalAmount=" + totalAmount
-				+ ", createdBy=" + createdBy + ", areaFrom=" + areaFrom + ", onlineNotes=" + onlineNotes
-				+ ", arrivalType=" + arrivalType + ", noOfAdult=" + noOfAdult + ", noOfChild=" + noOfChild
-				+ ", totalNoOfPerson=" + totalNoOfPerson + ", paymentType=" + paymentType + ", amountForChild="
-				+ amountForChild + ", amountForAdult=" + amountForAdult + ", totalAmountForChild=" + totalAmountForChild
-				+ ", totalAmountForAdult=" + totalAmountForAdult + ", status=" + status + ", bookingId=" + bookingId
-				+ ", invoiceNumber=" + invoiceNumber + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
+				+ vehicleType + ", vehicleBrand=" + vehicleBrand + ", vehicleName=" + vehicleName + ", transportType="
+				+ transportType + ", vehicleQuantity=" + vehicleQuantity + ", countryCode=" + countryCode
+				+ ", customerMobile=" + customerMobile + ", customerName=" + customerName + ", fromDate=" + fromDate
+				+ ", totalAmount=" + totalAmount + ", totalPayableAmount=" + totalPayableAmount + ", createdBy="
+				+ createdBy + ", areaFrom=" + areaFrom + ", onlineNotes=" + onlineNotes + ", arrivalType=" + arrivalType
+				+ ", noOfAdult=" + noOfAdult + ", noOfChild=" + noOfChild + ", totalNoOfPerson=" + totalNoOfPerson
+				+ ", paymentType=" + paymentType + ", amountForChild=" + amountForChild + ", amountForAdult="
+				+ amountForAdult + ", totalAmountForChild=" + totalAmountForChild + ", totalAmountForAdult="
+				+ totalAmountForAdult + ", status=" + status + ", bookingId=" + bookingId + ", invoiceNumber="
+				+ invoiceNumber + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
 	}
+
+	
 
 }

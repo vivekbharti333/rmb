@@ -174,12 +174,12 @@ public class DashboardReportHelper {
 		
 		if (vehicleRequest.getMemberType().equals("SUPER2ADMIN")) {
 	        List<Object[]> results = bookingDetailsDao.getEntityManager().createQuery(
-	                "SELECT ud.createdbyName, SUM(CASE WHEN ud.status IN (:BOOKED, :REQUESTED) THEN ud.receivedAmount ELSE 0 END), " +
-	                "COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED) THEN ud.id END) AS saleCount ," +
+	                "SELECT ud.createdbyName, SUM(CASE WHEN ud.status IN (:BOOKED, :REQUESTED,:CANCELREQUEST,:CANCELREJECT) THEN ud.receivedAmount ELSE 0 END), " +
+	                "COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED,:CANCELREQUEST,:CANCELREJECT) THEN ud.id END) AS saleCount ," +
 	                "COUNT(CASE WHEN ud.status IN (:ENQUIRY) THEN ud.id END) AS enquiryCount, " +
 	                
-	                "(((COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED) THEN ud.id END) * 100) / " +
-	                "(COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED) THEN ud.id END) + " +
+	                "(((COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED,:CANCELREQUEST,:CANCELREJECT) THEN ud.id END) * 100) / " +
+	                "(COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED,:CANCELREQUEST,:CANCELREJECT) THEN ud.id END) + " +
 	                "COUNT(CASE WHEN ud.status IN (:ENQUIRY) THEN ud.id END)))) as percentage " +
 	                "FROM BookingDetails ud " +
 	                "WHERE ud.createdAt BETWEEN :currentDate AND :lastDate " +
@@ -191,18 +191,20 @@ public class DashboardReportHelper {
 	                .setParameter("BOOKED", "BOOKED")
 	                .setParameter("REQUESTED", "REQUESTED")
 	                .setParameter("ENQUIRY", "ENQUIRY")
+	                .setParameter("CANCELREQUEST", "CANCELREQUEST").setParameter("CANCELREJECT", "CANCELREJECT")
 	                .getResultList();
+	        	        
 	        return results;
 	    } else if (vehicleRequest.getMemberType().equals("SALE")
 	    		|| vehicleRequest.getMemberType().equals("CARCHATSALE") 
 	    		|| vehicleRequest.getMemberType().equals("WATERSPORTSCHATSALE")) {
 	        List<Object[]> results = bookingDetailsDao.getEntityManager().createQuery(
-	                "SELECT ud.createdbyName, SUM(CASE WHEN ud.status IN (:BOOKED, :REQUESTED) THEN ud.receivedAmount ELSE 0 END), " +
-	                "COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED) THEN ud.id END) AS saleCount ," +
+	                "SELECT ud.createdbyName, SUM(CASE WHEN ud.status IN (:BOOKED, :REQUESTED,:CANCELREQUEST,:CANCELREJECT) THEN ud.receivedAmount ELSE 0 END), " +
+	                "COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED,:CANCELREQUEST,:CANCELREJECT) THEN ud.id END) AS saleCount ," +
 	                "COUNT(CASE WHEN ud.status IN (:ENQUIRY) THEN ud.id END) AS enquiryCount, " +
 	                
-	                "(((COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED) THEN ud.id END) * 100) / " +
-	                "(COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED) THEN ud.id END) + " +
+	                "(((COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED,:CANCELREQUEST,:CANCELREJECT) THEN ud.id END) * 100) / " +
+	                "(COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED,:CANCELREQUEST,:CANCELREJECT) THEN ud.id END) + " +
 	                "COUNT(CASE WHEN ud.status IN (:ENQUIRY) THEN ud.id END)))) as percentage " +
 	                "FROM BookingDetails ud " +
 	                "WHERE ud.createdAt BETWEEN :currentDate AND :lastDate " +
@@ -214,16 +216,17 @@ public class DashboardReportHelper {
 	                .setParameter("BOOKED", "BOOKED")
 	                .setParameter("REQUESTED", "REQUESTED")
 	                .setParameter("ENQUIRY", "ENQUIRY")
+	                .setParameter("CANCELREQUEST", "CANCELREQUEST").setParameter("CANCELREJECT", "CANCELREJECT")
 	                .getResultList();
 	        return results;
 	    } else {
 	        List<Object[]> results = bookingDetailsDao.getEntityManager().createQuery(
-	                "SELECT ud.createdbyName, SUM(CASE WHEN ud.status IN (:BOOKED, :REQUESTED) THEN ud.receivedAmount ELSE 0 END), " +
+	                "SELECT ud.createdbyName, SUM(CASE WHEN ud.status IN (:BOOKED, :REQUESTED,:CANCELREQUEST,:CANCELREJECT) THEN ud.receivedAmount ELSE 0 END), " +
 	                "COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED) THEN ud.id END) AS saleCount ," +
 	                "COUNT(CASE WHEN ud.status IN (:ENQUIRY) THEN ud.id END) AS enquiryCount, " +
 	                
-	                "(((COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED) THEN ud.id END) * 100) / " +
-	                "(COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED) THEN ud.id END) + " +
+	                "(((COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED,:CANCELREQUEST,:CANCELREJECT) THEN ud.id END) * 100) / " +
+	                "(COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED,:CANCELREQUEST,:CANCELREJECT) THEN ud.id END) + " +
 	                "COUNT(CASE WHEN ud.status IN (:ENQUIRY) THEN ud.id END)))) as percentage " +
 	                "FROM BookingDetails ud " +
 	                "WHERE ud.createdAt BETWEEN :currentDate AND :lastDate AND ud.createdBy NOT IN(:rohan,:rashmi,:akshi,:sameer)" +
@@ -233,6 +236,7 @@ public class DashboardReportHelper {
 	                .setParameter("BOOKED", "BOOKED")
 	                .setParameter("REQUESTED", "REQUESTED")
 	                .setParameter("ENQUIRY", "ENQUIRY")
+	                .setParameter("CANCELREQUEST", "CANCELREQUEST").setParameter("CANCELREJECT", "CANCELREJECT")
 	                .setParameter("rohan", "7845273233")
 	                .setParameter("rashmi", "9619283833")
 	                .setParameter("akshi", "7694848781")
@@ -263,12 +267,12 @@ public class DashboardReportHelper {
         
         if (vehicleRequest.getMemberType().equals("SUPER2ADMIN")) {
 	        List<Object[]> results = bookingDetailsDao.getEntityManager().createQuery(
-	                "SELECT ud.createdbyName, SUM(CASE WHEN ud.status IN (:BOOKED, :REQUESTED) THEN ud.receivedAmount ELSE 0 END), " +
-	                "COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED) THEN ud.id END) AS saleCount ," +
+	                "SELECT ud.createdbyName, SUM(CASE WHEN ud.status IN (:BOOKED, :REQUESTED,:CANCELREQUEST,:CANCELREJECT) THEN ud.receivedAmount ELSE 0 END), " +
+	                "COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED,:CANCELREQUEST,:CANCELREJECT) THEN ud.id END) AS saleCount ," +
 	                "COUNT(CASE WHEN ud.status IN (:ENQUIRY) THEN ud.id END) AS enquiryCount, " +
 	                
-	                "(((COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED) THEN ud.id END) * 100) / " +
-	                "(COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED) THEN ud.id END) + " +
+	                "(((COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED,:CANCELREQUEST,:CANCELREJECT) THEN ud.id END) * 100) / " +
+	                "(COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED,:CANCELREQUEST,:CANCELREJECT) THEN ud.id END) + " +
 	                "COUNT(CASE WHEN ud.status IN (:ENQUIRY) THEN ud.id END)))) as percentage " +
 	                "FROM BookingDetails ud " +
 	                "WHERE ud.createdAt BETWEEN :currentDate AND :lastDate " +
@@ -280,18 +284,19 @@ public class DashboardReportHelper {
 	                .setParameter("BOOKED", "BOOKED")
 	                .setParameter("REQUESTED", "REQUESTED")
 	                .setParameter("ENQUIRY", "ENQUIRY")
+	                .setParameter("CANCELREQUEST", "CANCELREQUEST").setParameter("CANCELREJECT", "CANCELREJECT")
 	                .getResultList();
 	        return results;
 	    }else if (vehicleRequest.getMemberType().equals("SALE")
 	    		|| vehicleRequest.getMemberType().equals("CARCHATSALE") 
 	    		|| vehicleRequest.getMemberType().equals("WATERSPORTSCHATSALE")) {
 	        List<Object[]> results = bookingDetailsDao.getEntityManager().createQuery(
-	                "SELECT ud.createdbyName, SUM(CASE WHEN ud.status IN (:BOOKED, :REQUESTED) THEN ud.receivedAmount ELSE 0 END), " +
-	                "COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED) THEN ud.id END) AS saleCount ," +
+	                "SELECT ud.createdbyName, SUM(CASE WHEN ud.status IN (:BOOKED, :REQUESTED,:CANCELREQUEST,:CANCELREJECT) THEN ud.receivedAmount ELSE 0 END), " +
+	                "COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED,:CANCELREQUEST,:CANCELREJECT) THEN ud.id END) AS saleCount ," +
 	                "COUNT(CASE WHEN ud.status IN (:ENQUIRY) THEN ud.id END) AS enquiryCount, " +
 	                
-	                "(((COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED) THEN ud.id END) * 100) / " +
-	                "(COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED) THEN ud.id END) + " +
+	                "(((COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED,:CANCELREQUEST,:CANCELREJECT) THEN ud.id END) * 100) / " +
+	                "(COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED,:CANCELREQUEST,:CANCELREJECT) THEN ud.id END) + " +
 	                "COUNT(CASE WHEN ud.status IN (:ENQUIRY) THEN ud.id END)))) as percentage " +
 	                "FROM BookingDetails ud " +
 	                "WHERE ud.createdAt BETWEEN :currentDate AND :lastDate " +
@@ -303,16 +308,17 @@ public class DashboardReportHelper {
 	                .setParameter("BOOKED", "BOOKED")
 	                .setParameter("REQUESTED", "REQUESTED")
 	                .setParameter("ENQUIRY", "ENQUIRY")
+	                .setParameter("CANCELREQUEST", "CANCELREQUEST").setParameter("CANCELREJECT", "CANCELREJECT")
 	                .getResultList();
 	        return results;
 	    } else {
 	        List<Object[]> results = bookingDetailsDao.getEntityManager().createQuery(
-	                "SELECT ud.createdbyName, SUM(CASE WHEN ud.status IN (:BOOKED, :REQUESTED) THEN ud.receivedAmount ELSE 0 END), " +
-	                "COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED) THEN ud.id END) AS saleCount ," +
+	                "SELECT ud.createdbyName, SUM(CASE WHEN ud.status IN (:BOOKED, :REQUESTED,:CANCELREQUEST,:CANCELREJECT) THEN ud.receivedAmount ELSE 0 END), " +
+	                "COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED,:CANCELREQUEST,:CANCELREJECT) THEN ud.id END) AS saleCount ," +
 	                "COUNT(CASE WHEN ud.status IN (:ENQUIRY) THEN ud.id END) AS enquiryCount, " +
 	                
-	                "(((COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED) THEN ud.id END) * 100) / " +
-	                "(COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED) THEN ud.id END) + " +
+	                "(((COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED,:CANCELREQUEST,:CANCELREJECT) THEN ud.id END) * 100) / " +
+	                "(COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED,:CANCELREQUEST,:CANCELREJECT) THEN ud.id END) + " +
 	                "COUNT(CASE WHEN ud.status IN (:ENQUIRY) THEN ud.id END)))) as percentage " +
 	                "FROM BookingDetails ud " +
 	                "WHERE ud.createdAt BETWEEN :currentDate AND :lastDate AND ud.createdBy NOT IN(:rohan,:rashmi,:akshi,:sameer)" +
@@ -322,6 +328,7 @@ public class DashboardReportHelper {
 	                .setParameter("BOOKED", "BOOKED")
 	                .setParameter("REQUESTED", "REQUESTED")
 	                .setParameter("ENQUIRY", "ENQUIRY")
+	                .setParameter("CANCELREQUEST", "CANCELREQUEST").setParameter("CANCELREJECT", "CANCELREJECT")
 	                .setParameter("rohan", "7845273233")
 	                .setParameter("rashmi", "9619283833")
 	                .setParameter("akshi", "7694848781")
@@ -346,12 +353,12 @@ public class DashboardReportHelper {
         
         if (vehicleRequest.getMemberType().equals("SUPER2ADMIN")) {
 	        List<Object[]> results = bookingDetailsDao.getEntityManager().createQuery(
-	                "SELECT ud.createdbyName, SUM(CASE WHEN ud.status IN (:BOOKED, :REQUESTED) THEN ud.receivedAmount ELSE 0 END), " +
-	                "COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED) THEN ud.id END) AS saleCount ," +
+	                "SELECT ud.createdbyName, SUM(CASE WHEN ud.status IN (:BOOKED, :REQUESTED,:CANCELREQUEST,:CANCELREJECT) THEN ud.receivedAmount ELSE 0 END), " +
+	                "COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED,:CANCELREQUEST,:CANCELREJECT) THEN ud.id END) AS saleCount ," +
 	                "COUNT(CASE WHEN ud.status IN (:ENQUIRY) THEN ud.id END) AS enquiryCount, " +
 	                
-	                "(((COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED) THEN ud.id END) * 100) / " +
-	                "(COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED) THEN ud.id END) + " +
+	                "(((COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED,:CANCELREQUEST,:CANCELREJECT) THEN ud.id END) * 100) / " +
+	                "(COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED,:CANCELREQUEST,:CANCELREJECT) THEN ud.id END) + " +
 	                "COUNT(CASE WHEN ud.status IN (:ENQUIRY) THEN ud.id END)))) as percentage " +
 	                "FROM BookingDetails ud " +
 	                "WHERE ud.createdAt BETWEEN :currentDate AND :lastDate " +
@@ -363,16 +370,17 @@ public class DashboardReportHelper {
 	                .setParameter("BOOKED", "BOOKED")
 	                .setParameter("REQUESTED", "REQUESTED")
 	                .setParameter("ENQUIRY", "ENQUIRY")
+	                .setParameter("CANCELREQUEST", "CANCELREQUEST").setParameter("CANCELREJECT", "CANCELREJECT")
 	                .getResultList();
 	        return results;
 	    }else if (vehicleRequest.getMemberType().equals("SALE")) {
 	        List<Object[]> results = bookingDetailsDao.getEntityManager().createQuery(
-	                "SELECT ud.createdbyName, SUM(CASE WHEN ud.status IN (:BOOKED, :REQUESTED) THEN ud.receivedAmount ELSE 0 END), " +
-	                "COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED) THEN ud.id END) AS saleCount ," +
+	                "SELECT ud.createdbyName, SUM(CASE WHEN ud.status IN (:BOOKED, :REQUESTED,:CANCELREQUEST,:CANCELREJECT) THEN ud.receivedAmount ELSE 0 END), " +
+	                "COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED,:CANCELREQUEST,:CANCELREJECT) THEN ud.id END) AS saleCount ," +
 	                "COUNT(CASE WHEN ud.status IN (:ENQUIRY) THEN ud.id END) AS enquiryCount, " +
 	                
-	                "(((COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED) THEN ud.id END) * 100) / " +
-	                "(COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED) THEN ud.id END) + " +
+	                "(((COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED,:CANCELREQUEST,:CANCELREJECT) THEN ud.id END) * 100) / " +
+	                "(COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED,:CANCELREQUEST,:CANCELREJECT) THEN ud.id END) + " +
 	                "COUNT(CASE WHEN ud.status IN (:ENQUIRY) THEN ud.id END)))) as percentage " +
 	                "FROM BookingDetails ud " +
 	                "WHERE ud.createdAt BETWEEN :currentDate AND :lastDate " +
@@ -384,16 +392,17 @@ public class DashboardReportHelper {
 	                .setParameter("BOOKED", "BOOKED")
 	                .setParameter("REQUESTED", "REQUESTED")
 	                .setParameter("ENQUIRY", "ENQUIRY")
+	                .setParameter("CANCELREQUEST", "CANCELREQUEST").setParameter("CANCELREJECT", "CANCELREJECT")
 	                .getResultList();
 	        return results;
 	    } else {
 	        List<Object[]> results = bookingDetailsDao.getEntityManager().createQuery(
 	        		"SELECT ud.createdbyName, " +
-	                        "SUM(CASE WHEN ud.status IN (:BOOKED, :REQUESTED) THEN ud.receivedAmount ELSE 0 END), " +
-	                        "COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED) THEN ud.id END) AS saleCount ," +
+	                        "SUM(CASE WHEN ud.status IN (:BOOKED, :REQUESTED,:CANCELREQUEST,:CANCELREJECT) THEN ud.receivedAmount ELSE 0 END), " +
+	                        "COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED,:CANCELREQUEST,:CANCELREJECT) THEN ud.id END) AS saleCount ," +
 	                        "COUNT(CASE WHEN ud.status IN (:ENQUIRY) THEN ud.id END) AS enquiryCount, " +
-	                        "(((COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED) THEN ud.id END) * 100) / " +
-	                        "(COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED) THEN ud.id END) + " +
+	                        "(((COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED,:CANCELREQUEST,:CANCELREJECT) THEN ud.id END) * 100) / " +
+	                        "(COUNT(CASE WHEN ud.status IN (:BOOKED, :REQUESTED,:CANCELREQUEST,:CANCELREJECT) THEN ud.id END) + " +
 	                        "COUNT(CASE WHEN ud.status IN (:ENQUIRY) THEN ud.id END)))) as percentage " +
 	                        "FROM BookingDetails ud " +
 	                        "WHERE ud.createdAt BETWEEN :currentDate AND :lastDate AND ud.createdBy NOT IN(:rohan,:rashmi,:akshi,:sameer)" +
@@ -403,6 +412,7 @@ public class DashboardReportHelper {
 	                .setParameter("BOOKED", "BOOKED")
 	                .setParameter("REQUESTED", "REQUESTED")
 	                .setParameter("ENQUIRY", "ENQUIRY")
+	                .setParameter("CANCELREQUEST", "CANCELREQUEST").setParameter("CANCELREJECT", "CANCELREJECT")
 	                .setParameter("rohan", "7845273233")
 	                .setParameter("rashmi", "9619283833")
 	                .setParameter("akshi", "7694848781")

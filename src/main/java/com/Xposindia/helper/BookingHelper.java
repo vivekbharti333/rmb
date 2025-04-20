@@ -1105,7 +1105,6 @@ public List<BookingDetails> getBookingDetailsForCall(VehicleRequestObject bookin
          if (bookingRequest.getRequestFor().equalsIgnoreCase("CUSTOM")) {
             new ArrayList();
             results = (ArrayList)this.bookingDetailsDao.getEntityManager().createQuery("SELECT UD.createdbyName, COUNT(*), SUM(receivedAmount) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate AND status NOT IN(:CANCEL,:ENQUIRY,:FOLLOWUP,:LOST,:REJECTED,:REFUND,:MISSEDCALL) GROUP BY UD.createdbyName").setParameter("currentDate", bookingRequest.getFromDate(), TemporalType.DATE).setParameter("lastDate", bookingRequest.getToDate(), TemporalType.DATE).setParameter("CANCEL", "CANCEL").setParameter("ENQUIRY", "ENQUIRY").setParameter("FOLLOWUP", "FOLLOWUP").setParameter("LOST", "LOST").setParameter("REJECTED", "REJECTED").setParameter("REFUND", "REFUND").setParameter("MISSEDCALL", "MISSEDCALL").getResultList();
-            System.out.println(bookingRequest.getFromDate() + "  ,  " + bookingRequest.getToDate());
             return results;
          }
 
@@ -1125,17 +1124,17 @@ public List<BookingDetails> getBookingDetailsForCall(VehicleRequestObject bookin
             new ArrayList();
             results = (ArrayList)this.bookingDetailsDao.getEntityManager()
             		.createQuery("SELECT UD.createdbyName, COUNT(*), SUM(receivedAmount) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate AND "
-//            				+ "status NOT IN(:CANCEL,:ENQUIRY,:FOLLOWUP,:LOST,:REJECTED,:REFUND,:MISSEDCALL) "
-            				+ "UD.status IN (:REQUESTED,:BOOKED)"
+            				+ "status NOT IN(:CANCEL,:ENQUIRY,:FOLLOWUP,:LOST,:REJECTED,:REFUND,:MISSEDCALL) "
+//            				+ "UD.status IN (:REQUESTED,:BOOKED)"
             				+ "AND UD.createdBy NOT IN(:rohan,:rashmi,:akshi) GROUP BY UD.createdbyName")
             		.setParameter("currentDate", bookingRequest.getFromDate(), TemporalType.DATE)
             		.setParameter("lastDate", bookingRequest.getToDate(), TemporalType.DATE)
-            		.setParameter("REQUESTED", "REQUESTED")
-            		.setParameter("BOOKED", "BOOKED")
-//            		.setParameter("CANCEL", "CANCEL").setParameter("ENQUIRY", "ENQUIRY")
-//            		.setParameter("FOLLOWUP", "FOLLOWUP").setParameter("LOST", "LOST")
-//            		.setParameter("REJECTED", "REJECTED").setParameter("REFUND", "REFUND")
-//            		.setParameter("MISSEDCALL", "MISSEDCALL")
+//            		.setParameter("REQUESTED", "REQUESTED")
+//            		.setParameter("BOOKED", "BOOKED")
+            		.setParameter("CANCEL", "CANCEL").setParameter("ENQUIRY", "ENQUIRY")
+            		.setParameter("FOLLOWUP", "FOLLOWUP").setParameter("LOST", "LOST")
+            		.setParameter("REJECTED", "REJECTED").setParameter("REFUND", "REFUND")
+            		.setParameter("MISSEDCALL", "MISSEDCALL")
             		.setParameter("rohan", "7845273233")
             		.setParameter("rashmi", "9619283833")
             		.setParameter("akshi", "7694848781")

@@ -389,8 +389,8 @@ public class InvoiceHelper2 {
 					+"\n"
 					+ "<h4>TERMS & CONDITIONS:</h4>\n"
 					+ "<br>\n"
-//					+ "https://myraanrentals.com/refund-and-cancellation<br>\n"
-					+ "https://travolo.in/terms-and-conditions.html<br>\n"
+					+ "https://myraanrentals.com/refund-and-cancellation<br>\n"
+//					+ "https://travolo.in/terms-and-conditions.html<br>\n"
 					+ "</body>\n"
 					+ "</html>";	
 				}

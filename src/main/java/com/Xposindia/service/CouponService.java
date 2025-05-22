@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.Xposindia.constant.Constant;
 import com.Xposindia.entities.CouponDetails;
-import com.Xposindia.enums.Status;
 import com.Xposindia.expections.BizException;
 import com.Xposindia.helper.CouponHelper;
 import com.Xposindia.object.request.CouponRequestObject;

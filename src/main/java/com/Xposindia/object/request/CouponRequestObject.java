@@ -1,9 +1,6 @@
 package com.Xposindia.object.request;
 
 import java.util.Date;
-
-import javax.persistence.Column;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 

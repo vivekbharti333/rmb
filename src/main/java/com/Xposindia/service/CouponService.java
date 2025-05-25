@@ -2,6 +2,8 @@ package com.Xposindia.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +25,7 @@ public class CouponService {
 		CouponRequestObject couponRequest = couponRequestObject.getPayload();
 		couponHelper.validateCouponRequest(couponRequest);
 
-		CouponDetails existsCoupondetails = couponHelper.getCouponDetailsByCoupon(couponRequest.getCoupon());
+		CouponDetails existsCoupondetails = couponHelper.getCouponDetailsByCoupon(couponRequest.getCoupon().toUpperCase());
 		if (existsCoupondetails == null) {
 
 			CouponDetails couponDetails = couponHelper.getCouponDetailsByReqObj(couponRequest);
@@ -42,7 +44,7 @@ public class CouponService {
 		CouponRequestObject couponRequest = couponRequestObject.getPayload();
 		couponHelper.validateCouponRequest(couponRequest);
 		
-		CouponDetails couponDetails = couponHelper.getValidCouponDetails(couponRequest.getCoupon());
+		CouponDetails couponDetails = couponHelper.getValidCouponDetails(couponRequest.getCoupon().toUpperCase());
 		if (couponDetails != null) {
 			couponRequest.setCouponAmount(couponDetails.getCouponAmount());
 			couponRequest.setRespCode(Constant.SUCCESS_CODE);
@@ -60,6 +62,18 @@ public class CouponService {
 
 		List<CouponDetails> callQualityDetails = couponHelper.getCouponDetails(couponRequest);
 		return callQualityDetails;
+	}
+
+	@Transactional
+	public CouponRequestObject deleteCouponDetails(Request<CouponRequestObject> couponRequestObject) throws BizException {
+		CouponRequestObject couponRequest = couponRequestObject.getPayload();
+		couponHelper.validateCouponRequest(couponRequest);
+		
+		CouponDetails couponDetails = couponHelper.getCouponDetailsByCouponByIds(couponRequest.getId());
+		if(couponDetails != null) {
+			couponHelper.deleteCouponDetails(couponDetails);
+		}
+		return null;
 	}
 
 	

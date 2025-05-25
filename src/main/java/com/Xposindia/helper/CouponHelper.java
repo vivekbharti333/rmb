@@ -18,6 +18,7 @@ import com.Xposindia.dao.CouponDetailsDao;
 import com.Xposindia.entities.CallQualityDetails;
 import com.Xposindia.entities.CouponDetails;
 import com.Xposindia.entities.Customer;
+import com.Xposindia.enums.Status;
 import com.Xposindia.expections.BizException;
 import com.Xposindia.object.request.CouponRequestObject;
 import com.Xposindia.object.request.QualityRequestObject;
@@ -46,15 +47,14 @@ public class CouponHelper {
 		return couponDetails;
 	}
 	
-//	@Transactional
-//	public CouponDetails getCouponDetailsByCouponNByStatus(String coupon, String status)
-//	{ 
-//		Criteria cr = couponDetailsDao.getSession().createCriteria(CouponDetails.class);
-//		cr.add(Restrictions.eq("coupon", coupon));
-//		cr.add(Restrictions.eq("status", status));
-//		CouponDetails  couponDetails = (CouponDetails) cr.uniqueResult();
-//		return couponDetails;
-//	}
+	@Transactional
+	public CouponDetails getCouponDetailsByCouponByIds(Long id)
+	{ 
+		Criteria cr = couponDetailsDao.getSession().createCriteria(CouponDetails.class);
+		cr.add(Restrictions.eq("id", id));
+		CouponDetails  couponDetails = (CouponDetails) cr.uniqueResult();
+		return couponDetails;
+	}
 	
 	@Transactional
 	public CouponDetails getValidCouponDetails(String coupon) {
@@ -74,10 +74,11 @@ public class CouponHelper {
 	{ 
 		CouponDetails couponDetails = new CouponDetails();
 		
-		couponDetails.setCoupon(couponRequest.getCoupon());
+		couponDetails.setCoupon(couponRequest.getCoupon().toUpperCase());
 		couponDetails.setCouponAmount(couponRequest.getCouponAmount());
 		couponDetails.setCouponType(couponRequest.getCouponType());
 		couponDetails.setCouponLimit(couponRequest.getCouponLimit());
+		couponDetails.setStatus(Status.ACTIVE.name());
 		couponDetails.setCouponExpiredOn(couponRequest.getCouponExpiredOn());
 		couponDetails.setCreatedBy(couponRequest.getCreatedBy());
 		couponDetails.setCreatedAt(new Date());
@@ -100,13 +101,21 @@ public class CouponHelper {
 					.setParameter("createdBy", couponRequest.getCreatedBy())
 					.getResultList();
 			return results;
+		} else if(couponRequest.getRequestFor().equalsIgnoreCase("ALL")) {
+			List<CouponDetails> results = couponDetailsDao.getEntityManager()
+					.createQuery("SELECT CD FROM CouponDetails CD ORDER BY CD.id DESC")
+					.getResultList();
+			return results;
 		}
 		return null;
 	}
 	
+	@Transactional
+	public void deleteCouponDetails(CouponDetails couponDetails) 
+	{ 
+		couponDetailsDao.delete(couponDetails);
+	}
 	
-	
-	@SuppressWarnings("unchecked")
 	public List<CallQualityDetails> getTotalScoreForCallQualityDetails(QualityRequestObject qualityRequest) {
 //		Date date = new Date();
 //		Date nextDay = Date.from(date.toInstant().plus(1, ChronoUnit.DAYS));

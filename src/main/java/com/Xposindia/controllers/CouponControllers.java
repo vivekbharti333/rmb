@@ -81,6 +81,21 @@ public class CouponControllers
 		}
 	}
 	
+	@RequestMapping(path = "deleteCouponDetails", method = RequestMethod.POST)
+	public Response<CouponRequestObject>deleteCouponDetails(@RequestBody Request<CouponRequestObject> couponRequestObject)
+	{
+		GenricResponse<CouponRequestObject> responseObj = new GenricResponse<CouponRequestObject>();
+		try {
+			CouponRequestObject responce =  couponService.deleteCouponDetails(couponRequestObject);
+			return responseObj.createSuccessResponse(responce, Constant.SUCCESS_CODE);
+		}catch (BizException e) {
+			return responseObj.createErrorResponse(Constant.BAD_REQUEST_CODE,e.getMessage());
+		} 
+ 		catch (Exception e) {
+			return responseObj.createErrorResponse(Constant.INTERNAL_SERVER_ERR, e.getMessage());
+		}
+	 }
+	
 //	@RequestMapping(path = "getScore", method = RequestMethod.POST)
 //	public Response<QualityRequestObject>getScore(@RequestBody Request<QualityRequestObject> qualityRequestObject)
 //	{

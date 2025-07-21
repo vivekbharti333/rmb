@@ -61,6 +61,7 @@ public class VehicleRequestObject {
 	private Long totalEarning;
 	private Long dailyBonus;
 	private Long monthlyBonus;
+	private String paymentGatewayPageRedirectUrl;
 	
 	private String fromDate1;
 	private Date fromDate;
@@ -195,6 +196,12 @@ public class VehicleRequestObject {
 	}
 	public void setVehicleImages4(String vehicleImages4) {
 		this.vehicleImages4 = vehicleImages4;
+	}
+	public String getPaymentGatewayPageRedirectUrl() {
+		return paymentGatewayPageRedirectUrl;
+	}
+	public void setPaymentGatewayPageRedirectUrl(String paymentGatewayPageRedirectUrl) {
+		this.paymentGatewayPageRedirectUrl = paymentGatewayPageRedirectUrl;
 	}
 	public String getVehicleBrand() {
 		return vehicleBrand;

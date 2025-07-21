@@ -29,6 +29,9 @@ public class WebBookingService {
 	@Autowired
 	private RozarpayPgService rozarpayPgService;
 	
+	@Autowired
+	private PhonePgService phonePgService;
+	
 	
 
 	@Transactional
@@ -46,18 +49,15 @@ public class WebBookingService {
 			vehicleRequest.setRespMesg("Booking With Same Mobile No. Already Exists");
 			return vehicleRequest;
 		} else {		
-			System.out.println("Enter 2 : ");
 			vehicleRequest.setInvoiceNumber(StringUtils.substring(RandomStringUtils.random(64, false, true), 0, 12));
-			System.out.println("Enter 2.1 : ");
 			WebBookingDetails bookingDetails = webBookingHelper.getWaterSportsDetailsByObj(vehicleRequest);
-			System.out.println("Enter 2.2 : "+bookingDetails);
 			webBookingHelper.savewebBookingDetails(bookingDetails);  
 			
 			System.out.println("Enter 3 : ");
+			phonePgService.getPhonePePaymentLink(vehicleRequest);
+//			String paymentLink = rozarpayPgService.getRozarpayPaymentLink(vehicleRequest);
 			
-			String paymentLink = rozarpayPgService.getRozarpayPaymentLink(vehicleRequest);
-			
-			vehicleRequest.setPaymentLink(paymentLink);
+//			vehicleRequest.setPaymentLink(paymentLink);
 			
 		}
 			

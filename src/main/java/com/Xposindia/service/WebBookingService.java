@@ -39,30 +39,27 @@ public class WebBookingService {
 			throws BizException, Exception {
 		VehicleRequestObject vehicleRequest = (VehicleRequestObject) vehicleRequestObject.getPayload();
 		webBookingHelper.validateBookingRequest(vehicleRequest);
-		
-		System.out.println("hjh : "+vehicleRequest.toString());
 
 		List<BookingDetails> bookingList = bookingHelper.getBookingDetailsByCustomerMobileNo(vehicleRequest);
-		System.out.println("Enter 1 : ");
 		if (!bookingList.isEmpty()) {
 			vehicleRequest.setRespCode(Constant.BAD_REQUEST_CODE);
 			vehicleRequest.setRespMesg("Booking With Same Mobile No. Already Exists");
 			return vehicleRequest;
-		} else {		
+		} else {
 			vehicleRequest.setInvoiceNumber(StringUtils.substring(RandomStringUtils.random(64, false, true), 0, 12));
 			WebBookingDetails bookingDetails = webBookingHelper.getWaterSportsDetailsByObj(vehicleRequest);
-			webBookingHelper.savewebBookingDetails(bookingDetails);  
-			
+			webBookingHelper.savewebBookingDetails(bookingDetails);
+
 			System.out.println("Enter 3 : ");
-			phonePgService.getPhonePePaymentLink(vehicleRequest);
+//			phonePgService.getPhonePePaymentUrl(bookingDetails);
 //			String paymentLink = rozarpayPgService.getRozarpayPaymentLink(vehicleRequest);
-			
-//			vehicleRequest.setPaymentLink(paymentLink);
-			
+
+			vehicleRequest.setPaymentLink(phonePgService.getPhonePePaymentUrl(bookingDetails));
+
 		}
-			
-			return vehicleRequest;
-		
+
+		return vehicleRequest;
+
 	}
 	
 

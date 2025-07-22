@@ -1,5 +1,6 @@
 package com.Xposindia.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.RandomStringUtils;
@@ -14,6 +15,7 @@ import com.Xposindia.entities.WebBookingDetails;
 import com.Xposindia.expections.BizException;
 import com.Xposindia.helper.BookingHelper;
 import com.Xposindia.helper.WebBookingHelper;
+import com.Xposindia.object.request.PhonePeStatusRequest;
 import com.Xposindia.object.request.Request;
 import com.Xposindia.object.request.VehicleRequestObject;
 
@@ -74,6 +76,30 @@ public class WebBookingService {
 	      List<WebBookingDetails> bookingList = webBookingHelper.getAllWebBookingDetails(bookingRequest);
 	      return bookingList;
 	   }
+
+
+	public PhonePeStatusRequest checkPhonePeStatus(Request<PhonePeStatusRequest> phonePeStatusRequest) throws BizException, Exception {
+		PhonePeStatusRequest phonePeRequest = phonePeStatusRequest.getPayload();
+		
+		System.out.println("1 : "+phonePeStatusRequest.getPayload().getBookingId());
+//		webBookingHelper.validateBookingRequest(vehicleRequest);
+		System.out.println("Enter hai");
+		
+		phonePeRequest = phonePgService.checkPhonePePaymentStatus(phonePeStatusRequest.getPayload().getBookingId());
+		System.out.println("Booking id : "+phonePeRequest);
+		
+		WebBookingDetails bookingDetails = webBookingHelper.getVehicleDetailsByBookingId(phonePeStatusRequest.getPayload().getBookingId());
+		System.out.println("123 : "+bookingDetails);
+		if(bookingDetails != null) {
+			
+			System.out.println("bookingDetails : "+bookingDetails);
+			
+			bookingDetails.setStatus("PAID ONLINE");
+        	bookingDetails.setUpdatedAt(new Date());
+//        	webBookingHelper.updateWebBookingDetails(bookingDetails);
+		}
+		return phonePeRequest;
+	}
 	
 	
 

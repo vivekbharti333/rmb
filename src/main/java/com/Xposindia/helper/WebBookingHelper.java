@@ -40,6 +40,14 @@ public class WebBookingHelper {
 			throw new BizException(Constant.BAD_REQUEST_CODE, "Bad Request Object Null");
 		}
 	}
+	
+	@Transactional
+	public WebBookingDetails getVehicleDetailsByBookingId(String bookingId) {
+		Criteria cr = bookingDetailsDao.getSession().createCriteria(WebBookingDetails.class);
+		cr.add(Restrictions.eq("bookingId", bookingId));
+		WebBookingDetails bookingDetails = (WebBookingDetails) cr.uniqueResult();
+		return bookingDetails;
+	}
 
 	@Transactional
 	public WebBookingDetails getVehicleDetailsByInvoiceNumber(String invoiceNumber) {

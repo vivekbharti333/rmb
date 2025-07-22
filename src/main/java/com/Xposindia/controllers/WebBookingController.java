@@ -3,39 +3,24 @@ package com.Xposindia.controllers;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.File;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
-import org.apache.commons.io.FilenameUtils;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.Xposindia.constant.Constant;
-import com.Xposindia.entities.BookingDetails;
-import com.Xposindia.entities.VehicleDetails;
 import com.Xposindia.entities.WebBookingDetails;
 import com.Xposindia.expections.BizException;
 import com.Xposindia.helper.UserHelper;
 import com.Xposindia.helper.WebBookingHelper;
+import com.Xposindia.object.request.PhonePeStatusRequest;
 import com.Xposindia.object.request.Request;
 import com.Xposindia.object.request.VehicleRequestObject;
 import com.Xposindia.object.response.GenricResponse;
 import com.Xposindia.object.response.Response;
-import com.Xposindia.service.BookingService;
 import com.Xposindia.service.WebBookingService;
 
 
@@ -127,6 +112,22 @@ public class WebBookingController
         // Return a response if needed
         return "Call Admin for Payment Confirmation";
     }
+	
+	
+	@RequestMapping(path = "checkPhonePeStatus", method = RequestMethod.POST)
+	public Response<PhonePeStatusRequest>checkPhonePeStatus(@RequestBody Request<PhonePeStatusRequest> phonePeStatusRequest)
+	{
+		GenricResponse<PhonePeStatusRequest> responseObj = new GenricResponse<PhonePeStatusRequest>();
+		try {
+			PhonePeStatusRequest responce =  webBookingService.checkPhonePeStatus(phonePeStatusRequest);
+			return responseObj.createSuccessResponse(responce, Constant.SUCCESS_CODE);
+		}catch (BizException e) {
+			return responseObj.createErrorResponse(Constant.BAD_REQUEST_CODE,e.getMessage());
+		} 
+ 		catch (Exception e) {
+			return responseObj.createErrorResponse(Constant.INTERNAL_SERVER_ERR, e.getMessage());
+		}
+	 }
 	
 
 } 

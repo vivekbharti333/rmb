@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.Xposindia.entities.WebBookingDetails;
+import com.Xposindia.object.request.PhonePeStatusRequest;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import okhttp3.FormBody;
 import okhttp3.MediaType;
@@ -26,13 +29,13 @@ public class PhonePgService {
 	HttpServletRequest request;
 
 	
-//	private String clientId = "TEST-M22PTZVX5Y144_25041";
-//	private String saltKey ="MDc0ZDVjMTUtYTA1MS00NDUzLTk5NDUtNzE1YjEzYTM3OWI1";
+	private String clientId = "TEST-M22PTZVX5Y144_25041";
+	private String saltKey ="MDc0ZDVjMTUtYTA1MS00NDUzLTk5NDUtNzE1YjEzYTM3OWI1";
 	
-	private String clientId = "SU2504111552196216732722";
-	private String saltKey ="d52ed729-cfc8-4e84-af3b-0d001ad06353";
-	private String authurl = "https://api.phonepe.com/apis/identity-manager/v1/oauth/token";
-	private String paymentLinkUrl = "https://api.phonepe.com/apis/pg/checkout/v2/pay";
+//	private String clientId = "SU2504111552196216732722";
+//	private String saltKey ="d52ed729-cfc8-4e84-af3b-0d001ad06353";
+//	private String authurl = "https://api.phonepe.com/apis/identity-manager/v1/oauth/token";
+//	private String paymentLinkUrl = "https://api.phonepe.com/apis/pg/checkout/v2/pay";
 	
 
 	
@@ -77,8 +80,8 @@ public class PhonePgService {
 
         // Construct POST request
         Request request = new Request.Builder()
-//                .url("https://api-preprod.phonepe.com/apis/pg-sandbox/v1/oauth/token")
-                .url(authurl)
+                .url("https://api-preprod.phonepe.com/apis/pg-sandbox/v1/oauth/token")
+//                .url(authurl)
                 .post(body)
                 .addHeader("Content-Type", "application/x-www-form-urlencoded")
                 .build();
@@ -106,8 +109,8 @@ public class PhonePgService {
 		OkHttpClient client = new OkHttpClient().newBuilder().build();
 		MediaType mediaType = MediaType.parse("application/json");
 		RequestBody body = RequestBody.create(mediaType, parameter);
-//		Request request = new Request.Builder().url("https://api-preprod.phonepe.com/apis/pg-sandbox/checkout/v2/pay")
-		Request request = new Request.Builder().url(paymentLinkUrl)
+		Request request = new Request.Builder().url("https://api-preprod.phonepe.com/apis/pg-sandbox/checkout/v2/pay")
+//		Request request = new Request.Builder().url(paymentLinkUrl)
 				.method("POST", body).addHeader("Content-Type", "application/json")
 				.addHeader("Authorization", "O-Bearer " + token).build();
 
@@ -122,6 +125,33 @@ public class PhonePgService {
 			String redirectUrl = json.getString("redirectUrl");
 			return redirectUrl;
 		}
+	}
+	
+	public PhonePeStatusRequest checkPhonePePaymentStatus(String merchantOrderId) throws IOException {
+	    System.out.println("1");
+	    String token = this.getAccessToken();
+	    System.out.println("2 : " + token);
+
+	    OkHttpClient client = new OkHttpClient().newBuilder().build();
+
+	    Request request = new Request.Builder()
+	        .url("https://api-preprod.phonepe.com/apis/pg-sandbox/checkout/v2/order/" + merchantOrderId + "/status")
+	        .get()
+	        .addHeader("Content-Type", "application/json")
+	        .addHeader("Authorization", "O-Bearer " + token)
+	        .build();
+
+	    try (Response response = client.newCall(request).execute()) {
+	        if (!response.isSuccessful()) {
+	            throw new IOException("Unexpected code " + response);
+	        }
+
+	        String responseBody = response.body().string();
+	        System.out.println("Status Response: " + responseBody);
+
+	        ObjectMapper mapper = new ObjectMapper();
+	        return mapper.readValue(responseBody, PhonePeStatusRequest.class);
+	    }
 	}
 
 }

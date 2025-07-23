@@ -345,6 +345,13 @@ public class BookingService {
                      if (!vehicleRequest.getVehicleDetailsType().isEmpty() && vehicleRequest.getVehicleDetailsType() != null) {
                         if (!vehicleRequest.getCity().isEmpty() && vehicleRequest.getCity() != null) {
                            if (vehicleRequest.getFromDate() == null) {
+                        	   
+                        	   if (!vehicleRequest.getToDate().after(vehicleRequest.getFromDate())) {
+                        		   vehicleRequest.setRespCode(401);
+                                   vehicleRequest.setRespMesg("Pickup Date cann't after drop date");
+                                   return vehicleRequest;
+                        	    } 
+                        	   
                               vehicleRequest.setRespCode(401);
                               vehicleRequest.setRespMesg("Pickup Date can not be Null");
                               return vehicleRequest;

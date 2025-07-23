@@ -72,6 +72,7 @@ public class WebBookingHelper {
 		WebBookingDetails bookingDetails = new WebBookingDetails();
 
 		bookingDetails.setBookingId(StringUtils.substring(RandomStringUtils.random(64, false, true), 0, 16));
+		vehicleRequest.setBookingId(bookingDetails.getBookingId());
 		bookingDetails.setTransportType(vehicleRequest.getTransportType());
 		bookingDetails.setVehicleType(vehicleRequest.getVehicleType());
 		bookingDetails.setVehicleDetailsType(vehicleRequest.getVehicleDetailsType());

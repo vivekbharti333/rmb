@@ -16,6 +16,7 @@ import com.Xposindia.expections.BizException;
 import com.Xposindia.helper.BookingHelper;
 import com.Xposindia.helper.WebBookingHelper;
 import com.Xposindia.object.request.PhonePeStatusRequest;
+import com.Xposindia.object.request.PhonePeStatusRequest.PaymentDetail;
 import com.Xposindia.object.request.Request;
 import com.Xposindia.object.request.VehicleRequestObject;
 
@@ -86,15 +87,21 @@ public class WebBookingService {
 		System.out.println("Enter hai");
 		
 		phonePeRequest = phonePgService.checkPhonePePaymentStatus(phonePeStatusRequest.getPayload().getBookingId());
-		System.out.println("Booking id : "+phonePeRequest);
+		System.out.println("Booking id : "+phonePeRequest.getPaymentDetails());
+		
+		PaymentDetail paymentDetails = phonePeRequest.getPaymentDetails().get(0);
+		System.out.println(paymentDetails.getAmount());
+		System.out.println(paymentDetails.getPaymentMode());
+		System.out.println(paymentDetails.getTransactionId());
+		System.out.println(phonePeRequest.getState());
+		
+		
 		
 		WebBookingDetails bookingDetails = webBookingHelper.getVehicleDetailsByBookingId(phonePeStatusRequest.getPayload().getBookingId());
 		System.out.println("123 : "+bookingDetails);
 		if(bookingDetails != null) {
 			
-			System.out.println("bookingDetails : "+bookingDetails);
-			
-			bookingDetails.setStatus("PAID ONLINE");
+			bookingDetails.setStatus(phonePeRequest.getState());
         	bookingDetails.setUpdatedAt(new Date());
 //        	webBookingHelper.updateWebBookingDetails(bookingDetails);
 		}

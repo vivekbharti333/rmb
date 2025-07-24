@@ -48,7 +48,7 @@ public class PhonePgService {
                 .put("udf5", "addition infor ref1");
 
         JSONObject merchantUrls = new JSONObject()
-                .put("redirectUrl", "http://romeyourway.com/payment-success");
+                .put("redirectUrl", "http://romeyourway.com/payment-status/"+bookingDetails.getBookingId());
 
         JSONObject paymentFlow = new JSONObject()
                 .put("type", "PG_CHECKOUT")

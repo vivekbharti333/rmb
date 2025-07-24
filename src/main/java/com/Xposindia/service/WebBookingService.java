@@ -89,11 +89,15 @@ public class WebBookingService {
 		phonePeRequest = phonePgService.checkPhonePePaymentStatus(phonePeStatusRequest.getPayload().getBookingId());
 		System.out.println("Booking id : "+phonePeRequest.getPaymentDetails());
 		
-		PaymentDetail paymentDetails = phonePeRequest.getPaymentDetails().get(0);
-		System.out.println(paymentDetails.getAmount());
-		System.out.println(paymentDetails.getPaymentMode());
-		System.out.println(paymentDetails.getTransactionId());
-		System.out.println(phonePeRequest.getState());
+//		if(phonePeRequest.getPaymentDetails().size() > 0) {
+//			
+//		}
+//		
+//		PaymentDetail paymentDetails = phonePeRequest.getPaymentDetails().get(0);
+//		System.out.println(paymentDetails.getAmount());
+//		System.out.println(paymentDetails.getPaymentMode());
+//		System.out.println(paymentDetails.getTransactionId());
+//		System.out.println(phonePeRequest.getState());
 		
 		
 		

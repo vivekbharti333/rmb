@@ -87,7 +87,7 @@ public class WebBookingService {
 		System.out.println("Enter hai");
 		
 		phonePeRequest = phonePgService.checkPhonePePaymentStatus(phonePeStatusRequest.getPayload().getBookingId());
-		System.out.println("Booking id : "+phonePeRequest.getPaymentDetails());
+		System.out.println("Booking id : "+phonePeRequest);
 		
 //		if(phonePeRequest.getPaymentDetails().size() > 0) {
 //			
@@ -101,14 +101,14 @@ public class WebBookingService {
 		
 		
 		
-		WebBookingDetails bookingDetails = webBookingHelper.getVehicleDetailsByBookingId(phonePeStatusRequest.getPayload().getBookingId());
-		System.out.println("123 : "+bookingDetails);
-		if(bookingDetails != null) {
-			
-			bookingDetails.setStatus(phonePeRequest.getState());
-        	bookingDetails.setUpdatedAt(new Date());
+//		WebBookingDetails bookingDetails = webBookingHelper.getVehicleDetailsByBookingId(phonePeStatusRequest.getPayload().getBookingId());
+//		System.out.println("123 : "+bookingDetails);
+//		if(bookingDetails != null) {
+//			
+//			bookingDetails.setStatus(phonePeRequest.getState());
+//        	bookingDetails.setUpdatedAt(new Date());
 //        	webBookingHelper.updateWebBookingDetails(bookingDetails);
-		}
+//		}
 		return phonePeRequest;
 	}
 	

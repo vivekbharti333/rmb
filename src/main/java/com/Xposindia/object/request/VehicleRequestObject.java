@@ -111,6 +111,7 @@ public class VehicleRequestObject {
 	private String lostCount;
 	private String modeOfPayment;
 	private String paymentLink;
+	private long amountPayableToVendor; 
 	
 	private Long todaysCount;
 	private Long tomorrowCount;
@@ -141,7 +142,8 @@ public class VehicleRequestObject {
 	
 	private String arrivalType;
 	private String onlineNotes;
-	private int noOfChild;
+	private int noOfKids;
+	private int noOfInfant;
 	private Long amountForChild;
 	private Long totalAmountForChild;
 	private int noOfAdult;
@@ -150,6 +152,7 @@ public class VehicleRequestObject {
 	private int totalNoOfPerson;
 	private String paymentType;	
 	private String dateType;
+	private long bookingAmount;
 	
 	private String respMesg;
 	private int respCode;
@@ -845,11 +848,18 @@ public class VehicleRequestObject {
 	public void setOnlineNotes(String onlineNotes) {
 		this.onlineNotes = onlineNotes;
 	}
-	public int getNoOfChild() {
-		return noOfChild;
+	
+	public int getNoOfKids() {
+		return noOfKids;
 	}
-	public void setNoOfChild(int noOfChild) {
-		this.noOfChild = noOfChild;
+	public void setNoOfKids(int noOfKids) {
+		this.noOfKids = noOfKids;
+	}
+	public int getNoOfInfant() {
+		return noOfInfant;
+	}
+	public void setNoOfInfant(int noOfInfant) {
+		this.noOfInfant = noOfInfant;
 	}
 	public Long getAmountForChild() {
 		return amountForChild;
@@ -904,6 +914,18 @@ public class VehicleRequestObject {
 	}
 	public void setTotalPayableAmount(int totalPayableAmount) {
 		this.totalPayableAmount = totalPayableAmount;
+	}
+	public long getBookingAmount() {
+		return bookingAmount;
+	}
+	public void setBookingAmount(long bookingAmount) {
+		this.bookingAmount = bookingAmount;
+	}
+	public long getAmountPayableToVendor() {
+		return amountPayableToVendor;
+	}
+	public void setAmountPayableToVendor(long amountPayableToVendor) {
+		this.amountPayableToVendor = amountPayableToVendor;
 	}
 
 

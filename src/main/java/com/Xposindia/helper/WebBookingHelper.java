@@ -88,6 +88,7 @@ public class WebBookingHelper {
 		bookingDetails.setFromDate(vehicleRequest.getFromDate());
 		bookingDetails.setAreaFrom(vehicleRequest.getAreaFrom());
 		bookingDetails.setTotalAmount(vehicleRequest.getTotalAmount());
+		bookingDetails.setBookingAmount(vehicleRequest.getBookingAmount());
 
 		bookingDetails.setCreatedBy(vehicleRequest.getCreatedBy());
 		bookingDetails.setCreatedAt(new Date());
@@ -95,10 +96,13 @@ public class WebBookingHelper {
 		
 //		bookingDetails.setArrivalType(vehicleRequest.getArrivalType());
 //		bookingDetails.setOnlineNotes(vehicleRequest.getOnlineNotes());
-		bookingDetails.setNoOfChild(vehicleRequest.getNoOfChild());
+//		bookingDetails.setNoOfChild(vehicleRequest.getNoOfChild());
 		bookingDetails.setAmountForChild(vehicleRequest.getAmountForChild());
 		bookingDetails.setTotalAmountForChild(vehicleRequest.getTotalAmountForChild());
 		bookingDetails.setNoOfAdult(vehicleRequest.getNoOfAdult());
+		bookingDetails.setNoOfKids(vehicleRequest.getNoOfKids());
+		bookingDetails.setNoOfInfant(vehicleRequest.getNoOfInfant());
+		bookingDetails.setAmountPayableToVendor(vehicleRequest.getAmountPayableToVendor());
 		bookingDetails.setAmountForAdult(vehicleRequest.getAmountForAdult());
 		bookingDetails.setTotalNoOfPerson(vehicleRequest.getTotalNoOfPerson());
 		bookingDetails.setPaymentType(vehicleRequest.getPaymentType());

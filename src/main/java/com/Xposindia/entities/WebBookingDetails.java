@@ -36,6 +36,12 @@ public class WebBookingDetails {
 	@Column(name = "vehicle_quantity")
 	private int vehicleQuantity;
 	
+	@Column(name = "no_of_kids")
+	private int noOfKids;
+	
+	@Column(name = "no_of_infant")
+	private int noOfInfant;
+	
 	@Column(name = "country_code")
 	private String countryCode;
 	
@@ -50,6 +56,9 @@ public class WebBookingDetails {
 	
 	@Column(name = "total_amount")
 	private int totalAmount;
+	
+	@Column(name = "booking_amount")
+	private long bookingAmount;
 	
 	@Column(name = "total_payable_amount")
 	private int totalPayableAmount;
@@ -69,9 +78,6 @@ public class WebBookingDetails {
 	
 	@Column(name = "no_of_adult")
 	private int noOfAdult;
-	
-	@Column(name = " no_of_child")
-	private int noOfChild;
 	
 	@Column(name = "total_no_of_person")
 	private int totalNoOfPerson;
@@ -96,6 +102,9 @@ public class WebBookingDetails {
 	
 	@Column(name = "booking_id")
 	private String bookingId;
+	
+	@Column(name = "amount_payable_to_vendor")
+	private long amountPayableToVendor; 
 	
 	
 	@Column(name = "invoice_number")
@@ -235,12 +244,21 @@ public class WebBookingDetails {
 		this.noOfAdult = noOfAdult;
 	}
 
-	public int getNoOfChild() {
-		return noOfChild;
+
+	public int getNoOfKids() {
+		return noOfKids;
 	}
 
-	public void setNoOfChild(int noOfChild) {
-		this.noOfChild = noOfChild;
+	public void setNoOfKids(int noOfKids) {
+		this.noOfKids = noOfKids;
+	}
+
+	public int getNoOfInfant() {
+		return noOfInfant;
+	}
+
+	public void setNoOfInfant(int noOfInfant) {
+		this.noOfInfant = noOfInfant;
 	}
 
 	public int getTotalNoOfPerson() {
@@ -347,20 +365,23 @@ public class WebBookingDetails {
 		this.totalPayableAmount = totalPayableAmount;
 	}
 
-	@Override
-	public String toString() {
-		return "WebBookingDetails [id=" + id + ", vehicleDetailsType=" + vehicleDetailsType + ", vehicleType="
-				+ vehicleType + ", vehicleBrand=" + vehicleBrand + ", vehicleName=" + vehicleName + ", transportType="
-				+ transportType + ", vehicleQuantity=" + vehicleQuantity + ", countryCode=" + countryCode
-				+ ", customerMobile=" + customerMobile + ", customerName=" + customerName + ", fromDate=" + fromDate
-				+ ", totalAmount=" + totalAmount + ", totalPayableAmount=" + totalPayableAmount + ", createdBy="
-				+ createdBy + ", areaFrom=" + areaFrom + ", onlineNotes=" + onlineNotes + ", arrivalType=" + arrivalType
-				+ ", noOfAdult=" + noOfAdult + ", noOfChild=" + noOfChild + ", totalNoOfPerson=" + totalNoOfPerson
-				+ ", paymentType=" + paymentType + ", amountForChild=" + amountForChild + ", amountForAdult="
-				+ amountForAdult + ", totalAmountForChild=" + totalAmountForChild + ", totalAmountForAdult="
-				+ totalAmountForAdult + ", status=" + status + ", bookingId=" + bookingId + ", invoiceNumber="
-				+ invoiceNumber + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
+	public long getBookingAmount() {
+		return bookingAmount;
 	}
+
+	public void setBookingAmount(long bookingAmount) {
+		this.bookingAmount = bookingAmount;
+	}
+
+	public long getAmountPayableToVendor() {
+		return amountPayableToVendor;
+	}
+
+	public void setAmountPayableToVendor(long amountPayableToVendor) {
+		this.amountPayableToVendor = amountPayableToVendor;
+	}
+
+	
 
 	
 

@@ -101,14 +101,13 @@ public class WebBookingService {
 		
 		
 		
-//		WebBookingDetails bookingDetails = webBookingHelper.getVehicleDetailsByBookingId(phonePeStatusRequest.getPayload().getBookingId());
-//		System.out.println("123 : "+bookingDetails);
-//		if(bookingDetails != null) {
-//			
-//			bookingDetails.setStatus(phonePeRequest.getState());
-//        	bookingDetails.setUpdatedAt(new Date());
-//        	webBookingHelper.updateWebBookingDetails(bookingDetails);
-//		}
+		WebBookingDetails bookingDetails = webBookingHelper.getVehicleDetailsByBookingId(phonePeStatusRequest.getPayload().getBookingId());
+		if(bookingDetails != null) {
+			
+			bookingDetails.setStatus(phonePeRequest.getState());
+        	bookingDetails.setUpdatedAt(new Date());
+        	webBookingHelper.updateWebBookingDetails(bookingDetails);
+		}
 		return phonePeRequest;
 	}
 	

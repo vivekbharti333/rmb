@@ -287,7 +287,7 @@ public class WebBookingHelper {
 	public List<WebBookingDetails> getAllWebBookingDetails(VehicleRequestObject bookingRequest) {
 		
 		List<WebBookingDetails> results = this.bookingDetailsDao.getEntityManager().createQuery(
-					"SELECT UD FROM WebBookingDetails UD")
+					"SELECT UD FROM WebBookingDetails UD order by UD.id desc")
 					.getResultList();
 			return results;
 		

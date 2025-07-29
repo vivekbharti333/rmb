@@ -76,8 +76,8 @@ public class CouponHelper {
 		
 		couponDetails.setCoupon(couponRequest.getCoupon().toUpperCase());
 		couponDetails.setCouponAmount(couponRequest.getCouponAmount());
-		couponDetails.setCouponType(couponRequest.getCouponType());
-		couponDetails.setCouponLimit(couponRequest.getCouponLimit());
+		couponDetails.setCouponType("FLAT");
+		couponDetails.setCouponLimit(5);
 		couponDetails.setStatus(Status.ACTIVE.name());
 		couponDetails.setCouponExpiredOn(couponRequest.getCouponExpiredOn());
 		couponDetails.setCreatedBy(couponRequest.getCreatedBy());

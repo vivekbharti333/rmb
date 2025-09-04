@@ -34,13 +34,13 @@ public class WebBookingDetails {
 	private String transportType;
 	
 	@Column(name = "vehicle_quantity")
-	private int vehicleQuantity;
+	private Integer vehicleQuantity;
 	
 	@Column(name = "no_of_kids")
-	private int noOfKids;
+	private Integer noOfKids;
 	
 	@Column(name = "no_of_infant")
-	private int noOfInfant;
+	private Integer noOfInfant;
 	
 	@Column(name = "country_code")
 	private String countryCode;
@@ -54,14 +54,14 @@ public class WebBookingDetails {
 	@Column(name = "from_date")
 	private Date fromDate;
 	
-	@Column(name = "total_amount")
-	private int totalAmount;
+	@Column(name = "web_total_amount")
+	private Double webTotalAmount;
 	
 	@Column(name = "booking_amount")
-	private long bookingAmount;
+	private Long bookingAmount;
 	
 	@Column(name = "total_payable_amount")
-	private int totalPayableAmount;
+	private Integer totalPayableAmount;
 	
 	@Column(name = "created_by")
 	private String createdBy;
@@ -77,10 +77,10 @@ public class WebBookingDetails {
 	private String arrivalType;
 	
 	@Column(name = "no_of_adult")
-	private int noOfAdult;
+	private Integer noOfAdult;
 	
 	@Column(name = "total_no_of_person")
-	private int totalNoOfPerson;
+	private Integer totalNoOfPerson;
 	
 	@Column(name = "payment_type")
 	private String paymentType;
@@ -104,7 +104,7 @@ public class WebBookingDetails {
 	private String bookingId;
 	
 	@Column(name = "amount_payable_to_vendor")
-	private long amountPayableToVendor; 
+	private Long amountPayableToVendor; 
 	
 	
 	@Column(name = "invoice_number")
@@ -122,14 +122,6 @@ public class WebBookingDetails {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getCustomerName() {
-		return customerName;
-	}
-
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
 	}
 
 	public String getVehicleDetailsType() {
@@ -164,12 +156,36 @@ public class WebBookingDetails {
 		this.vehicleName = vehicleName;
 	}
 
-	public int getVehicleQuantity() {
+	public String getTransportType() {
+		return transportType;
+	}
+
+	public void setTransportType(String transportType) {
+		this.transportType = transportType;
+	}
+
+	public Integer getVehicleQuantity() {
 		return vehicleQuantity;
 	}
 
-	public void setVehicleQuantity(int vehicleQuantity) {
+	public void setVehicleQuantity(Integer vehicleQuantity) {
 		this.vehicleQuantity = vehicleQuantity;
+	}
+
+	public Integer getNoOfKids() {
+		return noOfKids;
+	}
+
+	public void setNoOfKids(Integer noOfKids) {
+		this.noOfKids = noOfKids;
+	}
+
+	public Integer getNoOfInfant() {
+		return noOfInfant;
+	}
+
+	public void setNoOfInfant(Integer noOfInfant) {
+		this.noOfInfant = noOfInfant;
 	}
 
 	public String getCountryCode() {
@@ -188,6 +204,14 @@ public class WebBookingDetails {
 		this.customerMobile = customerMobile;
 	}
 
+	public String getCustomerName() {
+		return customerName;
+	}
+
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+
 	public Date getFromDate() {
 		return fromDate;
 	}
@@ -196,12 +220,28 @@ public class WebBookingDetails {
 		this.fromDate = fromDate;
 	}
 
-	public int getTotalAmount() {
-		return totalAmount;
+	public Double getWebTotalAmount() {
+		return webTotalAmount;
 	}
 
-	public void setTotalAmount(int totalAmount) {
-		this.totalAmount = totalAmount;
+	public void setWebTotalAmount(Double webTotalAmount) {
+		this.webTotalAmount = webTotalAmount;
+	}
+
+	public Long getBookingAmount() {
+		return bookingAmount;
+	}
+
+	public void setBookingAmount(Long bookingAmount) {
+		this.bookingAmount = bookingAmount;
+	}
+
+	public Integer getTotalPayableAmount() {
+		return totalPayableAmount;
+	}
+
+	public void setTotalPayableAmount(Integer totalPayableAmount) {
+		this.totalPayableAmount = totalPayableAmount;
 	}
 
 	public String getCreatedBy() {
@@ -236,36 +276,19 @@ public class WebBookingDetails {
 		this.arrivalType = arrivalType;
 	}
 
-	public int getNoOfAdult() {
+	public Integer getNoOfAdult() {
 		return noOfAdult;
 	}
 
-	public void setNoOfAdult(int noOfAdult) {
+	public void setNoOfAdult(Integer noOfAdult) {
 		this.noOfAdult = noOfAdult;
 	}
 
-
-	public int getNoOfKids() {
-		return noOfKids;
-	}
-
-	public void setNoOfKids(int noOfKids) {
-		this.noOfKids = noOfKids;
-	}
-
-	public int getNoOfInfant() {
-		return noOfInfant;
-	}
-
-	public void setNoOfInfant(int noOfInfant) {
-		this.noOfInfant = noOfInfant;
-	}
-
-	public int getTotalNoOfPerson() {
+	public Integer getTotalNoOfPerson() {
 		return totalNoOfPerson;
 	}
 
-	public void setTotalNoOfPerson(int totalNoOfPerson) {
+	public void setTotalNoOfPerson(Integer totalNoOfPerson) {
 		this.totalNoOfPerson = totalNoOfPerson;
 	}
 
@@ -325,6 +348,14 @@ public class WebBookingDetails {
 		this.bookingId = bookingId;
 	}
 
+	public Long getAmountPayableToVendor() {
+		return amountPayableToVendor;
+	}
+
+	public void setAmountPayableToVendor(Long amountPayableToVendor) {
+		this.amountPayableToVendor = amountPayableToVendor;
+	}
+
 	public String getInvoiceNumber() {
 		return invoiceNumber;
 	}
@@ -348,41 +379,5 @@ public class WebBookingDetails {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-
-	public String getTransportType() {
-		return transportType;
-	}
-
-	public void setTransportType(String transportType) {
-		this.transportType = transportType;
-	}
-
-	public int getTotalPayableAmount() {
-		return totalPayableAmount;
-	}
-
-	public void setTotalPayableAmount(int totalPayableAmount) {
-		this.totalPayableAmount = totalPayableAmount;
-	}
-
-	public long getBookingAmount() {
-		return bookingAmount;
-	}
-
-	public void setBookingAmount(long bookingAmount) {
-		this.bookingAmount = bookingAmount;
-	}
-
-	public long getAmountPayableToVendor() {
-		return amountPayableToVendor;
-	}
-
-	public void setAmountPayableToVendor(long amountPayableToVendor) {
-		this.amountPayableToVendor = amountPayableToVendor;
-	}
-
-	
-
-	
 
 }

@@ -87,7 +87,7 @@ public class WebBookingHelper {
 
 		bookingDetails.setFromDate(vehicleRequest.getFromDate());
 		bookingDetails.setAreaFrom(vehicleRequest.getAreaFrom());
-		bookingDetails.setTotalAmount(vehicleRequest.getTotalAmount());
+		bookingDetails.setWebTotalAmount(vehicleRequest.getWebTotalAmount());
 		bookingDetails.setBookingAmount(vehicleRequest.getBookingAmount());
 
 		bookingDetails.setCreatedBy(vehicleRequest.getCreatedBy());

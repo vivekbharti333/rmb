@@ -106,10 +106,12 @@ public class PhonePeStatusRequest {
 	}
 
 	// Rail class
+	@JsonIgnoreProperties(ignoreUnknown = true)
 	public static class Rail {
 		private String type;
 		private String utr;
 		private String upiTransactionId;
+		private String vpa; //  Added field
 
 		public String getType() { return type; }
 		public void setType(String type) { this.type = type; }
@@ -119,6 +121,9 @@ public class PhonePeStatusRequest {
 
 		public String getUpiTransactionId() { return upiTransactionId; }
 		public void setUpiTransactionId(String upiTransactionId) { this.upiTransactionId = upiTransactionId; }
+
+		public String getVpa() { return vpa; }
+		public void setVpa(String vpa) { this.vpa = vpa; }
 	}
 
 	// SplitInstrument class

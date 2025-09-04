@@ -82,6 +82,7 @@ public class VehicleRequestObject {
 	private int receivedAmount;
 	private int balenceAmount;
 	private int totalAmount;
+	private Double webTotalAmount;
 	private double miscellaneous;
 	private String refundReason;
 	private Date refundDate;
@@ -169,6 +170,12 @@ public class VehicleRequestObject {
 	}
 	public void setBookingDetailsId(long bookingDetailsId) {
 		this.bookingDetailsId = bookingDetailsId;
+	}
+	public Double getWebTotalAmount() {
+		return webTotalAmount;
+	}
+	public void setWebTotalAmount(Double webTotalAmount) {
+		this.webTotalAmount = webTotalAmount;
 	}
 	public String getUserId() {
 		return userId;

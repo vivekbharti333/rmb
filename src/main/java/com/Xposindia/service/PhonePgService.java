@@ -57,7 +57,7 @@ public class PhonePgService {
 
         JSONObject requestBody = new JSONObject()
                 .put("merchantOrderId", bookingDetails.getBookingId())
-                .put("amount", bookingDetails.getTotalAmount()*100)
+                .put("amount", bookingDetails.getWebTotalAmount()*100)
                 .put("expireAfter", 1200)
                 .put("metaInfo", metaInfo)
                 .put("paymentFlow", paymentFlow);

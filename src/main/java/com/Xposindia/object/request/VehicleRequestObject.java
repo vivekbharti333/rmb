@@ -42,6 +42,7 @@ public class VehicleRequestObject {
 	private String userRole;
 	private String discription;
 	private String vehicleDetailsType;
+	private Long balanceAmount;
 	private String bookingId;
 	private double bookingPrice;
 	private String memberType;
@@ -154,6 +155,7 @@ public class VehicleRequestObject {
 	private String paymentType;	
 	private String dateType;
 	private long bookingAmount;
+	private String location; 
 	
 	private String respMesg;
 	private int respCode;
@@ -171,11 +173,23 @@ public class VehicleRequestObject {
 	public void setBookingDetailsId(long bookingDetailsId) {
 		this.bookingDetailsId = bookingDetailsId;
 	}
+	public Long getBalanceAmount() {
+		return balanceAmount;
+	}
+	public void setBalanceAmount(Long balanceAmount) {
+		this.balanceAmount = balanceAmount;
+	}
 	public Double getWebTotalAmount() {
 		return webTotalAmount;
 	}
 	public void setWebTotalAmount(Double webTotalAmount) {
 		this.webTotalAmount = webTotalAmount;
+	}
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation(String location) {
+		this.location = location;
 	}
 	public String getUserId() {
 		return userId;

@@ -106,6 +106,8 @@ public class WebBookingDetails {
 	@Column(name = "amount_payable_to_vendor")
 	private Long amountPayableToVendor; 
 	
+	@Column(name = "balance_amount")
+	private Long balanceAmount;
 	
 	@Column(name = "invoice_number")
 	private String invoiceNumber;
@@ -162,6 +164,14 @@ public class WebBookingDetails {
 
 	public void setTransportType(String transportType) {
 		this.transportType = transportType;
+	}
+
+	public Long getBalanceAmount() {
+		return balanceAmount;
+	}
+
+	public void setBalanceAmount(Long balanceAmount) {
+		this.balanceAmount = balanceAmount;
 	}
 
 	public Integer getVehicleQuantity() {

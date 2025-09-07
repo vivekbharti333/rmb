@@ -86,9 +86,10 @@ public class WebBookingHelper {
 		bookingDetails.setStatus("INIT");
 
 		bookingDetails.setFromDate(vehicleRequest.getFromDate());
-		bookingDetails.setAreaFrom(vehicleRequest.getAreaFrom());
+		bookingDetails.setAreaFrom(vehicleRequest.getLocation());
 		bookingDetails.setWebTotalAmount(vehicleRequest.getWebTotalAmount());
 		bookingDetails.setBookingAmount(vehicleRequest.getBookingAmount());
+		bookingDetails.setBalanceAmount(vehicleRequest.getBalanceAmount());
 
 		bookingDetails.setCreatedBy(vehicleRequest.getCreatedBy());
 		bookingDetails.setCreatedAt(new Date());

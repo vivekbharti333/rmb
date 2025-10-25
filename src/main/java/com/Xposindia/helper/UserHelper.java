@@ -257,13 +257,28 @@ public class UserHelper {
 		return results;
 	}
 	
-	public List<Users> getAllUserExceptVendor() {
-		List<Users> results = userDao.getEntityManager()
-				.createQuery(" SELECT UD FROM Users UD Where UD.memberType NOT IN:memberType AND UD.userStatus =:userStatus ORDER BY UD.id DESC")
-				.setParameter("memberType","VENDOR" )
-				.setParameter("userStatus","ACTIVE" )
-				.getResultList();
-		return results;
+	public List<Users> getAllUserExceptVendor(UserRequestObject userRequest) {
+		if(userRequest.getUserRole().equalsIgnoreCase("SUPER2ADMIN")) {
+			List<Users> results = userDao.getEntityManager()
+					.createQuery(" SELECT UD FROM Users UD Where UD.memberType NOT IN:memberType AND UD.userStatus =:userStatus ORDER BY UD.id DESC")
+					.setParameter("memberType","VENDOR" )
+					.setParameter("userStatus","ACTIVE" )
+					.getResultList();
+			return results;
+		}else {
+			List<Users> results = userDao.getEntityManager()
+					.createQuery(" SELECT UD FROM Users UD Where UD.memberType NOT IN:memberType AND UD.userId NOT IN(:rohan,:rashmi,:akshi,:serena, :mohsin) AND UD.userStatus =:userStatus ORDER BY UD.id DESC")
+					.setParameter("memberType","VENDOR" )
+					.setParameter("userStatus","ACTIVE" )
+					.setParameter("rohan", "7845273233")
+	        		.setParameter("rashmi", "9619283833")
+	        		.setParameter("akshi", "7694848781")
+	        		.setParameter("serena", "7718858883")
+	        		.setParameter("mohsin", "9833220378")
+					.getResultList();
+			return results;
+		}
+		
 	}
 	
 	public List<Users> getAllVendorUser(UserRequestObject userRequest) {

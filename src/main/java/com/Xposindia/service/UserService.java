@@ -395,7 +395,7 @@ public class UserService {
 	
 	public List<Users> getAllUserExceptVendor(Request<UserRequestObject> userRequestObject) {
 		UserRequestObject userRequest = userRequestObject.getPayload();
-		List<Users> userList = userHelper.getAllUserExceptVendor();
+		List<Users> userList = userHelper.getAllUserExceptVendor(userRequest);
 		return userList;
 	}
 

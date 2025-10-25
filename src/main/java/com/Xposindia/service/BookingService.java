@@ -1,5 +1,22 @@
  package com.Xposindia.service;
 
+import java.io.File;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalAdjusters;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+
+import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.Xposindia.entities.BonusSlab;
 import com.Xposindia.entities.BookingDetails;
 import com.Xposindia.entities.BookingDetailsHistory;
@@ -16,21 +33,6 @@ import com.Xposindia.helper.UserHelper;
 import com.Xposindia.helper.VehicleHelper;
 import com.Xposindia.object.request.Request;
 import com.Xposindia.object.request.VehicleRequestObject;
-import java.io.File;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalAdjusters;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class BookingService {
@@ -1392,7 +1394,7 @@ public class BookingService {
           if (wba != null) {
              vehicleRequest.setDayReceivedAmount(wba.toString());
           } else {
-             vehicleRequest.setDayReceivedAmount("00");
+             vehicleRequest.setDayReceivedAmount("00"); 
           }
 
           List<BookingDetails> enquiryCount = this.bookingHelper.getBookingAmountOfWeekForWATERSPORTSCHATSALE(vehicleRequest);

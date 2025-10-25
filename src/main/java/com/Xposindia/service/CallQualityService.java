@@ -4,16 +4,15 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.Xposindia.constant.Constant;
 import com.Xposindia.entities.CallQualityDetails;
 import com.Xposindia.entities.Users;
-import com.Xposindia.entities.VehicleBrand;
 import com.Xposindia.expections.BizException;
 import com.Xposindia.helper.CallQualityHelper;
 import com.Xposindia.helper.UserHelper;
 import com.Xposindia.object.request.QualityRequestObject;
 import com.Xposindia.object.request.Request;
-import com.Xposindia.object.request.VehicleRequestObject;
 
 
 

@@ -1,14 +1,13 @@
 package com.Xposindia.service;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.Xposindia.constant.Constant;
 import com.Xposindia.entities.BonusSlab;
 import com.Xposindia.entities.BookingDetails;
@@ -22,9 +21,9 @@ import com.Xposindia.helper.AdminVehicleHelper;
 import com.Xposindia.helper.BookingHelper;
 import com.Xposindia.helper.CommonHelper;
 import com.Xposindia.helper.VehicleHelper;
-import com.Xposindia.object.request.VehicleRequestObject;
 import com.Xposindia.object.request.Request;
 import com.Xposindia.object.request.UserRequestObject;
+import com.Xposindia.object.request.VehicleRequestObject;
 
 @Service
 public class AdminVehicleService {

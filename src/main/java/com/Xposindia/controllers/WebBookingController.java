@@ -16,6 +16,7 @@ import com.Xposindia.entities.WebBookingDetails;
 import com.Xposindia.expections.BizException;
 import com.Xposindia.helper.UserHelper;
 import com.Xposindia.helper.WebBookingHelper;
+import com.Xposindia.object.request.CashfreeRequestObject;
 import com.Xposindia.object.request.PhonePeStatusRequest;
 import com.Xposindia.object.request.Request;
 import com.Xposindia.object.request.VehicleRequestObject;
@@ -120,6 +121,21 @@ public class WebBookingController
 		GenricResponse<PhonePeStatusRequest> responseObj = new GenricResponse<PhonePeStatusRequest>();
 		try {
 			PhonePeStatusRequest responce =  webBookingService.checkPhonePeStatus(phonePeStatusRequest);
+			return responseObj.createSuccessResponse(responce, Constant.SUCCESS_CODE);
+		}catch (BizException e) {
+			return responseObj.createErrorResponse(Constant.BAD_REQUEST_CODE,e.getMessage());
+		} 
+ 		catch (Exception e) {
+			return responseObj.createErrorResponse(Constant.INTERNAL_SERVER_ERR, e.getMessage());
+		}
+	 }
+	
+	@RequestMapping(path = "updateCashFreeStatus", method = RequestMethod.POST)
+	public Response<CashfreeRequestObject>updateCashFreeStatus(@RequestBody Request<CashfreeRequestObject> cashfreeRequestObject)
+	{
+		GenricResponse<CashfreeRequestObject> responseObj = new GenricResponse<CashfreeRequestObject>();
+		try {
+			CashfreeRequestObject responce =  webBookingService.updateCashFreeStatus(cashfreeRequestObject);
 			return responseObj.createSuccessResponse(responce, Constant.SUCCESS_CODE);
 		}catch (BizException e) {
 			return responseObj.createErrorResponse(Constant.BAD_REQUEST_CODE,e.getMessage());

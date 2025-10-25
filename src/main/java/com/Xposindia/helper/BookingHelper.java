@@ -763,7 +763,7 @@ public List<BookingDetails> getBookingDetailsForCall(VehicleRequestObject bookin
          		 .getResultList();
           return results;
        }else {
-         results = this.bookingDetailsDao.getEntityManager().createQuery("SELECT SUM(receivedAmount) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate AND status IN(:BOOKED,:REQUESTED, :CANCELREQUEST,:CANCELREJECT)  AND UD.createdBy NOT IN(:rohan,:rashmi,:akshi)")
+         results = this.bookingDetailsDao.getEntityManager().createQuery("SELECT SUM(receivedAmount) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate AND status IN(:BOOKED,:REQUESTED, :CANCELREQUEST,:CANCELREJECT)  AND UD.createdBy NOT IN(:rohan,:rashmi,:akshi,:serena)")
         		 .setParameter("currentDate", new Date(), TemporalType.DATE)
         		 .setParameter("lastDate", nextDay, TemporalType.DATE)
         		 .setParameter("BOOKED", "BOOKED")
@@ -773,6 +773,7 @@ public List<BookingDetails> getBookingDetailsForCall(VehicleRequestObject bookin
         		 .setParameter("rohan", "7845273233")
         		 .setParameter("rashmi", "9619283833")
         		 .setParameter("akshi", "7694848781")
+        		 .setParameter("serena", "7718858883")
         		 .getResultList();
          return results;
       }
@@ -811,7 +812,7 @@ public List<BookingDetails> getBookingDetailsForCall(VehicleRequestObject bookin
           		 .getResultList();
           return results;
        } else {
-         results = this.bookingDetailsDao.getEntityManager().createQuery("SELECT SUM(receivedAmount) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate AND status IN(:BOOKED,:REQUESTED, :CANCELREQUEST,:CANCELREJECT)  AND UD.createdBy NOT IN(:rohan,:rashmi,:akshi)")
+         results = this.bookingDetailsDao.getEntityManager().createQuery("SELECT SUM(receivedAmount) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate AND status IN(:BOOKED,:REQUESTED, :CANCELREQUEST,:CANCELREJECT)  AND UD.createdBy NOT IN(:rohan,:rashmi,:akshi,:serena)")
         		 .setParameter("currentDate", monday, TemporalType.DATE)
         		 .setParameter("lastDate", sunday, TemporalType.DATE)
         		 .setParameter("BOOKED", "BOOKED")
@@ -820,6 +821,7 @@ public List<BookingDetails> getBookingDetailsForCall(VehicleRequestObject bookin
         		 .setParameter("rohan", "7845273233")
         		 .setParameter("rashmi", "9619283833")
         		 .setParameter("akshi", "7694848781")
+        		 .setParameter("serena", "7718858883")
         		 .getResultList();
          return results;
       }
@@ -844,7 +846,7 @@ public List<BookingDetails> getBookingDetailsForCall(VehicleRequestObject bookin
           results = this.bookingDetailsDao.getEntityManager().createQuery("SELECT SUM(receivedAmount) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate  AND createdBy =:createdBy AND status IN(:BOOKED,:REQUESTED, :CANCELREQUEST,:CANCELREJECT))").setParameter("currentDate", firstDayOfMonth, TemporalType.DATE).setParameter("lastDate", lastDayOfMonth, TemporalType.DATE).setParameter("createdBy", bookingRequest.getCreatedBy()).setParameter("BOOKED", "BOOKED").setParameter("REQUESTED", "REQUESTED") .setParameter("CANCELREQUEST", "CANCELREQUEST").setParameter("CANCELREJECT", "CANCELREJECT").getResultList();
           return results;
        }else {
-         results = this.bookingDetailsDao.getEntityManager().createQuery("SELECT SUM(receivedAmount) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate AND status IN(:BOOKED,:REQUESTED,:CANCELREQUEST,:CANCELREJECT) AND UD.createdBy NOT IN(:rohan,:rashmi,:akshi)").setParameter("currentDate", firstDayOfMonth, TemporalType.DATE).setParameter("lastDate", lastDayOfMonth, TemporalType.DATE).setParameter("BOOKED", "BOOKED").setParameter("REQUESTED", "REQUESTED").setParameter("CANCELREQUEST", "CANCELREQUEST").setParameter("CANCELREJECT", "CANCELREJECT").setParameter("rohan", "7845273233").setParameter("rashmi", "9619283833").setParameter("akshi", "7694848781").getResultList();
+         results = this.bookingDetailsDao.getEntityManager().createQuery("SELECT SUM(receivedAmount) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate AND status IN(:BOOKED,:REQUESTED,:CANCELREQUEST,:CANCELREJECT) AND UD.createdBy NOT IN(:rohan,:rashmi,:akshi,:serena)").setParameter("currentDate", firstDayOfMonth, TemporalType.DATE).setParameter("lastDate", lastDayOfMonth, TemporalType.DATE).setParameter("BOOKED", "BOOKED").setParameter("REQUESTED", "REQUESTED").setParameter("CANCELREQUEST", "CANCELREQUEST").setParameter("CANCELREJECT", "CANCELREJECT").setParameter("rohan", "7845273233").setParameter("rashmi", "9619283833").setParameter("akshi", "7694848781") .setParameter("serena", "7718858883").getResultList();
          return results;
       }
    }
@@ -884,7 +886,21 @@ public List<BookingDetails> getBookingDetailsForCall(VehicleRequestObject bookin
          }
 
          if (requestFor.equalsIgnoreCase("ALL_BOOKED_COUNT")) {
-            results = this.bookingDetailsDao.getEntityManager().createQuery("SELECT SUM(receivedAmount) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate AND status NOT IN(:CANCEL,:ENQUIRY,:FOLLOWUP,:LOST,:REJECTED,:REFUND,:MISSEDCALL) AND UD.createdBy NOT IN(:rohan,:rashmi,:akshi)").setParameter("currentDate", new Date(), TemporalType.DATE).setParameter("lastDate", nextDay, TemporalType.DATE).setParameter("CANCEL", "CANCEL").setParameter("ENQUIRY", "ENQUIRY").setParameter("FOLLOWUP", "FOLLOWUP").setParameter("LOST", "LOST").setParameter("REJECTED", "REJECTED").setParameter("REFUND", "REFUND").setParameter("rohan", "7845273233").setParameter("rashmi", "9619283833").setParameter("akshi", "7694848781").setParameter("MISSEDCALL", "MISSEDCALL").getResultList();
+            results = this.bookingDetailsDao.getEntityManager().createQuery("SELECT SUM(receivedAmount) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate AND status NOT IN(:CANCEL,:ENQUIRY,:FOLLOWUP,:LOST,:REJECTED,:REFUND,:MISSEDCALL) AND UD.createdBy NOT IN(:rohan,:rashmi,:akshi,:serena)")
+            		.setParameter("currentDate", new Date(), TemporalType.DATE)
+            		.setParameter("lastDate", nextDay, TemporalType.DATE)
+            		.setParameter("CANCEL", "CANCEL")
+            		.setParameter("ENQUIRY", "ENQUIRY")
+            		.setParameter("FOLLOWUP", "FOLLOWUP")
+            		.setParameter("LOST", "LOST")
+            		.setParameter("REJECTED", "REJECTED")
+            		.setParameter("REFUND", "REFUND")
+            		.setParameter("rohan", "7845273233")
+            		.setParameter("rashmi", "9619283833")
+            		.setParameter("akshi", "7694848781")
+            		.setParameter("serena", "7718858883")
+            		.setParameter("MISSEDCALL", "MISSEDCALL")
+            		.getResultList();
             return results;
          }
       } else if (!bookingRequest.getMemberType().equals("SUPERADMIN") && !bookingRequest.getMemberType().equals("ADMIN")) {
@@ -915,38 +931,138 @@ public List<BookingDetails> getBookingDetailsForCall(VehicleRequestObject bookin
             }
 
             if (requestFor.equalsIgnoreCase("ALL_BOOKED_COUNT")) {
-               results = this.bookingDetailsDao.getEntityManager().createQuery("SELECT SUM(receivedAmount) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate AND status NOT IN(:CANCEL,:ENQUIRY,:FOLLOWUP,:LOST,:REJECTED,:REFUND,:MISSEDCALL) AND UD.createdBy NOT IN(:rohan,:rashmi,:akshi)").setParameter("currentDate", new Date(), TemporalType.DATE).setParameter("lastDate", nextDay, TemporalType.DATE).setParameter("CANCEL", "CANCEL").setParameter("ENQUIRY", "ENQUIRY").setParameter("FOLLOWUP", "FOLLOWUP").setParameter("LOST", "LOST").setParameter("REJECTED", "REJECTED").setParameter("REFUND", "REFUND").setParameter("rohan", "7845273233").setParameter("rashmi", "9619283833").setParameter("akshi", "7694848781").setParameter("MISSEDCALL", "MISSEDCALL").getResultList();
+               results = this.bookingDetailsDao.getEntityManager().createQuery("SELECT SUM(receivedAmount) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate AND status NOT IN(:CANCEL,:ENQUIRY,:FOLLOWUP,:LOST,:REJECTED,:REFUND,:MISSEDCALL) AND UD.createdBy NOT IN(:rohan,:rashmi,:akshi,:serena)")
+            		   .setParameter("currentDate", new Date(), TemporalType.DATE)
+            		   .setParameter("lastDate", nextDay, TemporalType.DATE)
+            		   .setParameter("CANCEL", "CANCEL")
+            		   .setParameter("ENQUIRY", "ENQUIRY")
+            		   .setParameter("FOLLOWUP", "FOLLOWUP")
+            		   .setParameter("LOST", "LOST")
+            		   .setParameter("REJECTED", "REJECTED")
+            		   .setParameter("REFUND", "REFUND")
+            		   .setParameter("rohan", "7845273233")
+            		   .setParameter("rashmi", "9619283833")
+            		   .setParameter("akshi", "7694848781")
+            		   .setParameter("serena", "7718858883")
+            		   .setParameter("MISSEDCALL", "MISSEDCALL")
+            		   .getResultList();
                return results;
             }
          }
       } else {
          if (requestFor.equalsIgnoreCase("DAY_BOOKED_COUNT")) {
-            results = this.bookingDetailsDao.getEntityManager().createQuery("SELECT COUNT(*) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate AND status NOT IN(:CANCEL,:ENQUIRY,:FOLLOWUP,:LOST,:REJECTED,:REFUND,:MISSEDCALL) AND UD.createdBy NOT IN(:rohan,:rashmi,:akshi)").setParameter("currentDate", new Date(), TemporalType.DATE).setParameter("lastDate", nextDay, TemporalType.DATE).setParameter("CANCEL", "CANCEL").setParameter("ENQUIRY", "ENQUIRY").setParameter("FOLLOWUP", "FOLLOWUP").setParameter("LOST", "LOST").setParameter("REJECTED", "REJECTED").setParameter("REFUND", "REFUND").setParameter("rohan", "7845273233").setParameter("rashmi", "9619283833").setParameter("akshi", "7694848781").setParameter("MISSEDCALL", "MISSEDCALL").getResultList();
+            results = this.bookingDetailsDao.getEntityManager().createQuery("SELECT COUNT(*) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate AND status NOT IN(:CANCEL,:ENQUIRY,:FOLLOWUP,:LOST,:REJECTED,:REFUND,:MISSEDCALL) AND UD.createdBy NOT IN(:rohan,:rashmi,:akshi,:serena)")
+            		.setParameter("currentDate", new Date(), TemporalType.DATE)
+            		.setParameter("lastDate", nextDay, TemporalType.DATE)
+            		.setParameter("CANCEL", "CANCEL")
+            		.setParameter("ENQUIRY", "ENQUIRY")
+            		.setParameter("FOLLOWUP", "FOLLOWUP")
+            		.setParameter("LOST", "LOST")
+            		.setParameter("REJECTED", "REJECTED")
+            		.setParameter("REFUND", "REFUND")
+            		.setParameter("rohan", "7845273233")
+            		.setParameter("rashmi", "9619283833")
+            		.setParameter("akshi", "7694848781")
+            		.setParameter("serena", "7718858883")
+            		.setParameter("MISSEDCALL", "MISSEDCALL")
+            		.getResultList();
             return results;
          }
 
          if (requestFor.equalsIgnoreCase("DAY_BOOKED_AMOUNT")) {
-            results = this.bookingDetailsDao.getEntityManager().createQuery("SELECT SUM(receivedAmount) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate AND status NOT IN(:CANCEL,:ENQUIRY,:FOLLOWUP,:LOST,:REJECTED,:REFUND,:MISSEDCALL) AND UD.createdBy NOT IN(:rohan,:rashmi,:akshi)").setParameter("currentDate", new Date(), TemporalType.DATE).setParameter("lastDate", nextDay, TemporalType.DATE).setParameter("CANCEL", "CANCEL").setParameter("ENQUIRY", "ENQUIRY").setParameter("FOLLOWUP", "FOLLOWUP").setParameter("LOST", "LOST").setParameter("REJECTED", "REJECTED").setParameter("REFUND", "REFUND").setParameter("rohan", "7845273233").setParameter("rashmi", "9619283833").setParameter("akshi", "7694848781").setParameter("MISSEDCALL", "MISSEDCALL").getResultList();
+            results = this.bookingDetailsDao.getEntityManager().createQuery("SELECT SUM(receivedAmount) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate AND status NOT IN(:CANCEL,:ENQUIRY,:FOLLOWUP,:LOST,:REJECTED,:REFUND,:MISSEDCALL) AND UD.createdBy NOT IN(:rohan,:rashmi,:akshi,:serena)")
+            		.setParameter("currentDate", new Date(), TemporalType.DATE)
+            		.setParameter("lastDate", nextDay, TemporalType.DATE)
+            		.setParameter("CANCEL", "CANCEL")
+            		.setParameter("ENQUIRY", "ENQUIRY")
+            		.setParameter("FOLLOWUP", "FOLLOWUP")
+            		.setParameter("LOST", "LOST")
+            		.setParameter("REJECTED", "REJECTED")
+            		.setParameter("REFUND", "REFUND")
+            		.setParameter("rohan", "7845273233")
+            		.setParameter("rashmi", "9619283833")
+            		.setParameter("akshi", "7694848781")
+            		.setParameter("serena", "7718858883")
+            		.setParameter("MISSEDCALL", "MISSEDCALL")
+            		.getResultList();
             return results;
          }
 
          if (requestFor.equalsIgnoreCase("WEEK_BOOKED_COUNT")) {
-            results = this.bookingDetailsDao.getEntityManager().createQuery("SELECT COUNT(*) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate AND status NOT IN(:CANCEL,:ENQUIRY,:FOLLOWUP,:LOST,:REJECTED,:REFUND,:MISSEDCALL) AND UD.createdBy NOT IN(:rohan,:rashmi,:akshi)").setParameter("currentDate", monday, TemporalType.DATE).setParameter("lastDate", sunday, TemporalType.DATE).setParameter("CANCEL", "CANCEL").setParameter("ENQUIRY", "ENQUIRY").setParameter("FOLLOWUP", "FOLLOWUP").setParameter("LOST", "LOST").setParameter("REJECTED", "REJECTED").setParameter("REFUND", "REFUND").setParameter("rohan", "7845273233").setParameter("rashmi", "9619283833").setParameter("akshi", "7694848781").setParameter("MISSEDCALL", "MISSEDCALL").getResultList();
+            results = this.bookingDetailsDao.getEntityManager().createQuery("SELECT COUNT(*) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate AND status NOT IN(:CANCEL,:ENQUIRY,:FOLLOWUP,:LOST,:REJECTED,:REFUND,:MISSEDCALL) AND UD.createdBy NOT IN(:rohan,:rashmi,:akshi,:serena)")
+            		.setParameter("currentDate", monday, TemporalType.DATE)
+            		.setParameter("lastDate", sunday, TemporalType.DATE)
+            		.setParameter("CANCEL", "CANCEL")
+            		.setParameter("ENQUIRY", "ENQUIRY")
+            		.setParameter("FOLLOWUP", "FOLLOWUP")
+            		.setParameter("LOST", "LOST")
+            		.setParameter("REJECTED", "REJECTED")
+            		.setParameter("REFUND", "REFUND")
+            		.setParameter("rohan", "7845273233")
+            		.setParameter("rashmi", "9619283833")
+            		.setParameter("akshi", "7694848781")
+            		.setParameter("serena", "7718858883")
+            		.setParameter("MISSEDCALL", "MISSEDCALL")
+            		.getResultList();
             return results;
          }
 
          if (requestFor.equalsIgnoreCase("WEEK_BOOKED_AMOUNT")) {
-            results = this.bookingDetailsDao.getEntityManager().createQuery("SELECT SUM(receivedAmount) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate AND status NOT IN(:CANCEL,:ENQUIRY,:FOLLOWUP,:LOST,:REJECTED,:REFUND,:MISSEDCALL) AND UD.createdBy NOT IN(:rohan,:rashmi, :akshi)").setParameter("currentDate", monday, TemporalType.DATE).setParameter("lastDate", sunday, TemporalType.DATE).setParameter("CANCEL", "CANCEL").setParameter("ENQUIRY", "ENQUIRY").setParameter("FOLLOWUP", "FOLLOWUP").setParameter("LOST", "LOST").setParameter("REJECTED", "REJECTED").setParameter("REFUND", "REFUND").setParameter("rohan", "7845273233").setParameter("rashmi", "9619283833").setParameter("akshi", "7694848781").setParameter("MISSEDCALL", "MISSEDCALL").getResultList();
+            results = this.bookingDetailsDao.getEntityManager().createQuery("SELECT SUM(receivedAmount) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate AND status NOT IN(:CANCEL,:ENQUIRY,:FOLLOWUP,:LOST,:REJECTED,:REFUND,:MISSEDCALL) AND UD.createdBy NOT IN(:rohan,:rashmi, :akshi,:serena)")
+            		.setParameter("currentDate", monday, TemporalType.DATE)
+            		.setParameter("lastDate", sunday, TemporalType.DATE)
+            		.setParameter("CANCEL", "CANCEL")
+            		.setParameter("ENQUIRY", "ENQUIRY")
+            		.setParameter("FOLLOWUP", "FOLLOWUP")
+            		.setParameter("LOST", "LOST")
+            		.setParameter("REJECTED", "REJECTED")
+            		.setParameter("REFUND", "REFUND")
+            		.setParameter("rohan", "7845273233")
+            		.setParameter("rashmi", "9619283833")
+            		.setParameter("akshi", "7694848781")
+            		.setParameter("serena", "7718858883")
+            		.setParameter("MISSEDCALL", "MISSEDCALL")
+            		.getResultList();
             return results;
          }
 
          if (requestFor.equalsIgnoreCase("ENQUIRY_COUNT")) {
-            results = this.bookingDetailsDao.getEntityManager().createQuery("SELECT COUNT(*) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate AND status NOT IN(:CANCEL,:BOOKED,:REQUESTED,:FOLLOWUP,:LOST,:REJECTED,:REFUND,:MISSEDCALL) AND UD.createdBy NOT IN(:rohan,:rashmi,:akshi)").setParameter("currentDate", new Date(), TemporalType.DATE).setParameter("lastDate", nextDay, TemporalType.DATE).setParameter("CANCEL", "CANCEL").setParameter("BOOKED", "BOOKED").setParameter("REQUESTED", "REQUESTED").setParameter("FOLLOWUP", "FOLLOWUP").setParameter("LOST", "LOST").setParameter("REJECTED", "REJECTED").setParameter("REFUND", "REFUND").setParameter("rohan", "7845273233").setParameter("rashmi", "9619283833").setParameter("akshi", "7694848781").setParameter("MISSEDCALL", "MISSEDCALL").getResultList();
+            results = this.bookingDetailsDao.getEntityManager()
+            		.createQuery("SELECT COUNT(*) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate AND status NOT IN(:CANCEL,:BOOKED,:REQUESTED,:FOLLOWUP,:LOST,:REJECTED,:REFUND,:MISSEDCALL) AND UD.createdBy NOT IN(:rohan,:rashmi,:akshi,:serena)")
+            		.setParameter("currentDate", new Date(), TemporalType.DATE)
+            		.setParameter("lastDate", nextDay, TemporalType.DATE)
+            		.setParameter("CANCEL", "CANCEL")
+            		.setParameter("BOOKED", "BOOKED")
+            		.setParameter("REQUESTED", "REQUESTED")
+            		.setParameter("FOLLOWUP", "FOLLOWUP")
+            		.setParameter("LOST", "LOST")
+            		.setParameter("REJECTED", "REJECTED")
+            		.setParameter("REFUND", "REFUND")
+            		.setParameter("rohan", "7845273233")
+            		.setParameter("rashmi", "9619283833")
+            		.setParameter("akshi", "7694848781")
+            		.setParameter("serena", "7718858883")
+            		.setParameter("MISSEDCALL", "MISSEDCALL")
+            		.getResultList();
             return results;
          }
 
          if (requestFor.equalsIgnoreCase("ALL_BOOKED_COUNT")) {
-            results = this.bookingDetailsDao.getEntityManager().createQuery("SELECT SUM(receivedAmount) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate AND status NOT IN(:CANCEL,:ENQUIRY,:FOLLOWUP,:LOST,:REJECTED,:REFUND,:MISSEDCALL) AND UD.createdBy NOT IN(:rohan,:rashmi,:akshi)").setParameter("currentDate", new Date(), TemporalType.DATE).setParameter("lastDate", nextDay, TemporalType.DATE).setParameter("CANCEL", "CANCEL").setParameter("ENQUIRY", "ENQUIRY").setParameter("FOLLOWUP", "FOLLOWUP").setParameter("LOST", "LOST").setParameter("REJECTED", "REJECTED").setParameter("REFUND", "REFUND").setParameter("rohan", "7845273233").setParameter("rashmi", "9619283833").setParameter("akshi", "7694848781").setParameter("MISSEDCALL", "MISSEDCALL").getResultList();
+            results = this.bookingDetailsDao.getEntityManager().createQuery("SELECT SUM(receivedAmount) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate AND status NOT IN(:CANCEL,:ENQUIRY,:FOLLOWUP,:LOST,:REJECTED,:REFUND,:MISSEDCALL) AND UD.createdBy NOT IN(:rohan,:rashmi,:akshi,:serena)")
+            		.setParameter("currentDate", new Date(), TemporalType.DATE)
+            		.setParameter("lastDate", nextDay, TemporalType.DATE)
+            		.setParameter("CANCEL", "CANCEL")
+            		.setParameter("ENQUIRY", "ENQUIRY")
+            		.setParameter("FOLLOWUP", "FOLLOWUP")
+            		.setParameter("LOST", "LOST")
+            		.setParameter("REJECTED", "REJECTED")
+            		.setParameter("REFUND", "REFUND")
+            		.setParameter("rohan", "7845273233")
+            		.setParameter("rashmi", "9619283833")
+            		.setParameter("akshi", "7694848781")
+            		.setParameter("serena", "7718858883")
+            		.setParameter("MISSEDCALL", "MISSEDCALL")
+            		.getResultList();
             return results;
          }
       }
@@ -964,22 +1080,50 @@ public List<BookingDetails> getBookingDetailsForCall(VehicleRequestObject bookin
       Date monthly = Date.from(todayDate.toInstant().plus(29L, ChronoUnit.DAYS));
       List results;
       if (requestFor.equalsIgnoreCase("TODAY_PENDING_COUNT")) {
-         results = this.bookingDetailsDao.getEntityManager().createQuery("SELECT COUNT(*) FROM BookingDetails UD where UD.fromDate BETWEEN :currentDate AND :lastDate AND status IN(:REQUESTED)").setParameter("currentDate", new Date(), TemporalType.DATE).setParameter("lastDate", new Date(), TemporalType.DATE).setParameter("REQUESTED", "REQUESTED").getResultList();
+         results = this.bookingDetailsDao.getEntityManager()
+        		 .createQuery("SELECT COUNT(*) FROM BookingDetails UD where UD.fromDate BETWEEN :currentDate AND :lastDate AND status IN(:REQUESTED)")
+        		 .setParameter("currentDate", new Date(), TemporalType.DATE)
+        		 .setParameter("lastDate", new Date(), TemporalType.DATE)
+        		 .setParameter("REQUESTED", "REQUESTED")
+        		 .getResultList();
          return results;
       } else if (requestFor.equalsIgnoreCase("TOMORROW_PENDING_COUNT")) {
-         results = this.bookingDetailsDao.getEntityManager().createQuery("SELECT COUNT(*) FROM BookingDetails UD where UD.fromDate BETWEEN :currentDate AND :lastDate AND status IN(:REQUESTED)").setParameter("currentDate", nextDay, TemporalType.DATE).setParameter("lastDate", nextDay, TemporalType.DATE).setParameter("REQUESTED", "REQUESTED").getResultList();
+         results = this.bookingDetailsDao.getEntityManager()
+        		 .createQuery("SELECT COUNT(*) FROM BookingDetails UD where UD.fromDate BETWEEN :currentDate AND :lastDate AND status IN(:REQUESTED)")
+        		 .setParameter("currentDate", nextDay, TemporalType.DATE)
+        		 .setParameter("lastDate", nextDay, TemporalType.DATE)
+        		 .setParameter("REQUESTED", "REQUESTED")
+        		 .getResultList();
          return results;
       } else if (requestFor.equalsIgnoreCase("AFTER_TOMORROW_PENDING_COUNT")) {
-         results = this.bookingDetailsDao.getEntityManager().createQuery("SELECT COUNT(*) FROM BookingDetails UD where UD.fromDate BETWEEN :currentDate AND :lastDate AND status IN(:REQUESTED)").setParameter("currentDate", afterNextDay, TemporalType.DATE).setParameter("lastDate", afterNextDay, TemporalType.DATE).setParameter("REQUESTED", "REQUESTED").getResultList();
+         results = this.bookingDetailsDao.getEntityManager().createQuery("SELECT COUNT(*) FROM BookingDetails UD where UD.fromDate BETWEEN :currentDate AND :lastDate AND status IN(:REQUESTED)")
+        		 .setParameter("currentDate", afterNextDay, TemporalType.DATE)
+        		 .setParameter("lastDate", afterNextDay, TemporalType.DATE)
+        		 .setParameter("REQUESTED", "REQUESTED")
+        		 .getResultList();
          return results;
       } else if (requestFor.equalsIgnoreCase("WEEKLY_PENDING_COUNT")) {
-         results = this.bookingDetailsDao.getEntityManager().createQuery("SELECT COUNT(*) FROM BookingDetails UD where UD.fromDate BETWEEN :currentDate AND :lastDate AND status IN(:REQUESTED)").setParameter("currentDate", new Date(), TemporalType.DATE).setParameter("lastDate", weekly, TemporalType.DATE).setParameter("REQUESTED", "REQUESTED").getResultList();
+         results = this.bookingDetailsDao.getEntityManager()
+        		 .createQuery("SELECT COUNT(*) FROM BookingDetails UD where UD.fromDate BETWEEN :currentDate AND :lastDate AND status IN(:REQUESTED)")
+        		 .setParameter("currentDate", new Date(), TemporalType.DATE)
+        		 .setParameter("lastDate", weekly, TemporalType.DATE)
+        		 .setParameter("REQUESTED", "REQUESTED")
+        		 .getResultList();
          return results;
       } else if (requestFor.equalsIgnoreCase("HALF_MONTH_PENDING_COUNT")) {
-         results = this.bookingDetailsDao.getEntityManager().createQuery("SELECT COUNT(*) FROM BookingDetails UD where UD.fromDate BETWEEN :currentDate AND :lastDate AND status IN(:REQUESTED)").setParameter("currentDate", new Date(), TemporalType.DATE).setParameter("lastDate", halfMonth, TemporalType.DATE).setParameter("REQUESTED", "REQUESTED").getResultList();
+         results = this.bookingDetailsDao.getEntityManager()
+        		 .createQuery("SELECT COUNT(*) FROM BookingDetails UD where UD.fromDate BETWEEN :currentDate AND :lastDate AND status IN(:REQUESTED)")
+        		 .setParameter("currentDate", new Date(), TemporalType.DATE)
+        		 .setParameter("lastDate", halfMonth, TemporalType.DATE)
+        		 .setParameter("REQUESTED", "REQUESTED")
+        		 .getResultList();
          return results;
       } else if (requestFor.equalsIgnoreCase("MONTH_PENDING_COUNT")) {
-         results = this.bookingDetailsDao.getEntityManager().createQuery("SELECT COUNT(*) FROM BookingDetails UD where UD.fromDate BETWEEN :currentDate AND :lastDate AND status IN(:REQUESTED)").setParameter("currentDate", new Date(), TemporalType.DATE).setParameter("lastDate", monthly, TemporalType.DATE).setParameter("REQUESTED", "REQUESTED").getResultList();
+         results = this.bookingDetailsDao.getEntityManager().createQuery("SELECT COUNT(*) FROM BookingDetails UD where UD.fromDate BETWEEN :currentDate AND :lastDate AND status IN(:REQUESTED)")
+        		 .setParameter("currentDate", new Date(), TemporalType.DATE)
+        		 .setParameter("lastDate", monthly, TemporalType.DATE)
+        		 .setParameter("REQUESTED", "REQUESTED")
+        		 .getResultList();
          return results;
       } else {
          return null;
@@ -987,22 +1131,35 @@ public List<BookingDetails> getBookingDetailsForCall(VehicleRequestObject bookin
    }
 
    public List<BookingDetails> cancelRequestList(VehicleRequestObject bookingRequest) {
-      List<BookingDetails> results = this.bookingDetailsDao.getEntityManager().createQuery("SELECT UD FROM BookingDetails UD where UD.status =:status ORDER BY UD.cancelDate DESC").setParameter("status", "CANCELREQUEST").getResultList();
+      List<BookingDetails> results = this.bookingDetailsDao.getEntityManager()
+    		  .createQuery("SELECT UD FROM BookingDetails UD where UD.status =:status ORDER BY UD.cancelDate DESC")
+    		  .setParameter("status", "CANCELREQUEST")
+    		  .getResultList();
       return results;
    }
 
    public List<BookingDetails> cancelBookingDetails(VehicleRequestObject bookingRequest) {
-      List<BookingDetails> results = this.bookingDetailsDao.getEntityManager().createQuery("SELECT UD FROM BookingDetails UD where UD.status =:status  ORDER BY UD.createdAt DESC").setParameter("status", "CANCEL").getResultList();
+      List<BookingDetails> results = this.bookingDetailsDao.getEntityManager()
+    		  .createQuery("SELECT UD FROM BookingDetails UD where UD.status =:status  ORDER BY UD.createdAt DESC")
+    		  .setParameter("status", "CANCEL")
+    		  .getResultList();
       return results;
    }
 
    public List<BookingDetails> completedBookingDetails(VehicleRequestObject bookingRequest) {
-      List<BookingDetails> results = this.bookingDetailsDao.getEntityManager().createQuery("SELECT UD FROM BookingDetails UD where UD.toDate <:toDate  ORDER BY UD.createdAt DESC").setParameter("toDate", new Date(), TemporalType.DATE).getResultList();
+      List<BookingDetails> results = this.bookingDetailsDao.getEntityManager()
+    		  .createQuery("SELECT UD FROM BookingDetails UD where UD.toDate <:toDate  ORDER BY UD.createdAt DESC")
+    		  .setParameter("toDate", new Date(), TemporalType.DATE)
+    		  .getResultList();
       return results;
    }
 
    public List<BookingDetails> inprocessBookingDetails(VehicleRequestObject bookingRequest) {
-      List<BookingDetails> results = this.bookingDetailsDao.getEntityManager().createQuery("SELECT UD FROM BookingDetails UD where UD.fromDate <:fromDate AND UD.toDate >:toDate  ORDER BY UD.createdAt DESC").setParameter("toDate", new Date(), TemporalType.DATE).setParameter("fromDate", new Date(), TemporalType.DATE).getResultList();
+      List<BookingDetails> results = this.bookingDetailsDao.getEntityManager()
+    		  .createQuery("SELECT UD FROM BookingDetails UD where UD.fromDate <:fromDate AND UD.toDate >:toDate  ORDER BY UD.createdAt DESC")
+    		  .setParameter("toDate", new Date(), TemporalType.DATE)
+    		  .setParameter("fromDate", new Date(), TemporalType.DATE)
+    		  .getResultList();
       return results;
    }
 
@@ -1045,7 +1202,22 @@ public List<BookingDetails> getBookingDetailsForCall(VehicleRequestObject bookin
 
          if (bookingRequest.getRequestFor().equalsIgnoreCase("FOLLOWUP")) {
             new ArrayList();
-            results = (ArrayList)this.bookingDetailsDao.getEntityManager().createQuery("SELECT UD.createdbyName, COUNT(*), SUM(receivedAmount) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate AND status NOT IN(:CANCEL,:BOOKED,:REQUESTED,:ENQUIRY,:LOST,:REJECTED,:REFUND,:MISSEDCALL) AND UD.createdBy NOT IN(:rohan,:rashmi,:akshi) GROUP BY UD.createdbyName ").setParameter("currentDate", new Date(), TemporalType.DATE).setParameter("lastDate", nextDay, TemporalType.DATE).setParameter("CANCEL", "CANCEL").setParameter("BOOKED", "BOOKED").setParameter("REQUESTED", "REQUESTED").setParameter("ENQUIRY", "ENQUIRY").setParameter("LOST", "LOST").setParameter("REJECTED", "REJECTED").setParameter("REFUND", "REFUND").setParameter("rohan", "7845273233").setParameter("rashmi", "9619283833").setParameter("akshi", "7694848781").setParameter("MISSEDCALL", "MISSEDCALL").getResultList();
+            results = (ArrayList)this.bookingDetailsDao.getEntityManager().createQuery("SELECT UD.createdbyName, COUNT(*), SUM(receivedAmount) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate AND status NOT IN(:CANCEL,:BOOKED,:REQUESTED,:ENQUIRY,:LOST,:REJECTED,:REFUND,:MISSEDCALL) AND UD.createdBy NOT IN(:rohan,:rashmi,:akshi,:serena) GROUP BY UD.createdbyName ")
+            		.setParameter("currentDate", new Date(), TemporalType.DATE)
+            		.setParameter("lastDate", nextDay, TemporalType.DATE)
+            		.setParameter("CANCEL", "CANCEL")
+            		.setParameter("BOOKED", "BOOKED")
+            		.setParameter("REQUESTED", "REQUESTED")
+            		.setParameter("ENQUIRY", "ENQUIRY")
+            		.setParameter("LOST", "LOST")
+            		.setParameter("REJECTED", "REJECTED")
+            		.setParameter("REFUND", "REFUND")
+            		.setParameter("rohan", "7845273233")
+            		.setParameter("rashmi", "9619283833")
+            		.setParameter("akshi", "7694848781")
+            		.setParameter("serena", "7718858883")
+            		.setParameter("MISSEDCALL", "MISSEDCALL")
+            		.getResultList();
             return results;
          }
 
@@ -1057,37 +1229,126 @@ public List<BookingDetails> getBookingDetailsForCall(VehicleRequestObject bookin
       } else {
          if (bookingRequest.getRequestFor().equalsIgnoreCase("TODAYS")) {
             new ArrayList();
-            results = (ArrayList)this.bookingDetailsDao.getEntityManager().createQuery("SELECT UD.createdbyName, COUNT(*), SUM(receivedAmount) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate AND status NOT IN(:CANCEL,:ENQUIRY,:FOLLOWUP,:LOST,:REJECTED,:REFUND,:MISSEDCALL) AND UD.createdBy NOT IN(:rohan,:rashmi,:akshi) GROUP BY UD.createdbyName").setParameter("currentDate", new Date(), TemporalType.DATE).setParameter("lastDate", nextDay, TemporalType.DATE).setParameter("CANCEL", "CANCEL").setParameter("ENQUIRY", "ENQUIRY").setParameter("FOLLOWUP", "FOLLOWUP").setParameter("LOST", "LOST").setParameter("REJECTED", "REJECTED").setParameter("REFUND", "REFUND").setParameter("MISSEDCALL", "MISSEDCALL").setParameter("rohan", "7845273233").setParameter("rashmi", "9619283833").setParameter("akshi", "7694848781").getResultList();
+            results = (ArrayList)this.bookingDetailsDao.getEntityManager().createQuery("SELECT UD.createdbyName, COUNT(*), SUM(receivedAmount) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate AND status NOT IN(:CANCEL,:ENQUIRY,:FOLLOWUP,:LOST,:REJECTED,:REFUND,:MISSEDCALL) AND UD.createdBy NOT IN(:rohan,:rashmi,:akshi,:serena) GROUP BY UD.createdbyName")
+            		.setParameter("currentDate", new Date(), TemporalType.DATE)
+            		.setParameter("lastDate", nextDay, TemporalType.DATE)
+            		.setParameter("CANCEL", "CANCEL")
+            		.setParameter("ENQUIRY", "ENQUIRY")
+            		.setParameter("FOLLOWUP", "FOLLOWUP")
+            		.setParameter("LOST", "LOST")
+            		.setParameter("REJECTED", "REJECTED")
+            		.setParameter("REFUND", "REFUND")
+            		.setParameter("MISSEDCALL", "MISSEDCALL")
+            		.setParameter("rohan", "7845273233")
+            		.setParameter("rashmi", "9619283833")
+            		.setParameter("akshi", "7694848781")
+            		.setParameter("serena", "7718858883")
+            		.getResultList();
             return results;
          }
 
          if (bookingRequest.getRequestFor().equalsIgnoreCase("WEEK")) {
             new ArrayList();
-            results = (ArrayList)this.bookingDetailsDao.getEntityManager().createQuery("SELECT UD.createdbyName, COUNT(*), SUM(receivedAmount) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate AND status NOT IN(:CANCEL,:ENQUIRY,:FOLLOWUP,:LOST,:REJECTED,:REFUND,:MISSEDCALL) AND UD.createdBy NOT IN(:rohan,:rashmi,:akshi) GROUP BY UD.createdbyName").setParameter("currentDate", monday, TemporalType.DATE).setParameter("lastDate", sunday, TemporalType.DATE).setParameter("CANCEL", "CANCEL").setParameter("ENQUIRY", "ENQUIRY").setParameter("FOLLOWUP", "FOLLOWUP").setParameter("LOST", "LOST").setParameter("REJECTED", "REJECTED").setParameter("REFUND", "REFUND").setParameter("MISSEDCALL", "MISSEDCALL").setParameter("rohan", "7845273233").setParameter("rashmi", "9619283833").setParameter("akshi", "7694848781").getResultList();
+            results = (ArrayList)this.bookingDetailsDao.getEntityManager()
+            		.createQuery("SELECT UD.createdbyName, COUNT(*), SUM(receivedAmount) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate AND status NOT IN(:CANCEL,:ENQUIRY,:FOLLOWUP,:LOST,:REJECTED,:REFUND,:MISSEDCALL) AND UD.createdBy NOT IN(:rohan,:rashmi,:akshi,:serena) GROUP BY UD.createdbyName")
+            		.setParameter("currentDate", monday, TemporalType.DATE)
+            		.setParameter("lastDate", sunday, TemporalType.DATE)
+            		.setParameter("CANCEL", "CANCEL")
+            		.setParameter("ENQUIRY", "ENQUIRY")
+            		.setParameter("FOLLOWUP", "FOLLOWUP")
+            		.setParameter("LOST", "LOST")
+            		.setParameter("REJECTED", "REJECTED")
+            		.setParameter("REFUND", "REFUND")
+            		.setParameter("MISSEDCALL", "MISSEDCALL")
+            		.setParameter("rohan", "7845273233")
+            		.setParameter("rashmi", "9619283833")
+            		.setParameter("akshi", "7694848781")
+            		.setParameter("serena", "7718858883")
+            		.getResultList();
             return results;
          }
 
          if (bookingRequest.getRequestFor().equalsIgnoreCase("MONTH")) {
             new ArrayList();
-            results = (ArrayList)this.bookingDetailsDao.getEntityManager().createQuery("SELECT UD.createdbyName, COUNT(*), SUM(receivedAmount) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate AND status NOT IN(:CANCEL,:ENQUIRY,:FOLLOWUP,:LOST,:REJECTED,:REFUND,:MISSEDCALL) AND UD.createdBy NOT IN(:rohan,:rashmi,:akshi) GROUP BY UD.createdbyName ").setParameter("currentDate", monthFirstDay, TemporalType.DATE).setParameter("lastDate", monthLastDay, TemporalType.DATE).setParameter("CANCEL", "CANCEL").setParameter("ENQUIRY", "ENQUIRY").setParameter("FOLLOWUP", "FOLLOWUP").setParameter("LOST", "LOST").setParameter("REJECTED", "REJECTED").setParameter("REFUND", "REFUND").setParameter("MISSEDCALL", "MISSEDCALL").setParameter("rohan", "7845273233").setParameter("rashmi", "9619283833").setParameter("akshi", "7694848781").getResultList();
+            results = (ArrayList)this.bookingDetailsDao.getEntityManager().createQuery("SELECT UD.createdbyName, COUNT(*), SUM(receivedAmount) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate AND status NOT IN(:CANCEL,:ENQUIRY,:FOLLOWUP,:LOST,:REJECTED,:REFUND,:MISSEDCALL) AND UD.createdBy NOT IN(:rohan,:rashmi,:akshi,:serena) GROUP BY UD.createdbyName ")
+            		.setParameter("currentDate", monthFirstDay, TemporalType.DATE)
+            		.setParameter("lastDate", monthLastDay, TemporalType.DATE)
+            		.setParameter("CANCEL", "CANCEL")
+            		.setParameter("ENQUIRY", "ENQUIRY")
+            		.setParameter("FOLLOWUP", "FOLLOWUP")
+            		.setParameter("LOST", "LOST")
+            		.setParameter("REJECTED", "REJECTED")
+            		.setParameter("REFUND", "REFUND")
+            		.setParameter("MISSEDCALL", "MISSEDCALL")
+            		.setParameter("rohan", "7845273233")
+            		.setParameter("rashmi", "9619283833")
+            		.setParameter("akshi", "7694848781")
+            		.setParameter("serena", "7718858883")
+            		.getResultList();
             return results;
          }
 
          if (bookingRequest.getRequestFor().equalsIgnoreCase("ENQUIRY")) {
             new ArrayList();
-            results = (ArrayList)this.bookingDetailsDao.getEntityManager().createQuery("SELECT UD.createdbyName, COUNT(*), SUM(receivedAmount) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate AND status NOT IN(:CANCEL,:BOOKED,:REQUESTED,:FOLLOWUP,:LOST,:REJECTED,:REFUND,:MISSEDCALL) AND UD.createdBy NOT IN(:rohan,:rashmi,:akshi) GROUP BY UD.createdbyName ").setParameter("currentDate", new Date(), TemporalType.DATE).setParameter("lastDate", nextDay, TemporalType.DATE).setParameter("CANCEL", "CANCEL").setParameter("BOOKED", "BOOKED").setParameter("REQUESTED", "REQUESTED").setParameter("FOLLOWUP", "FOLLOWUP").setParameter("LOST", "LOST").setParameter("REJECTED", "REJECTED").setParameter("REFUND", "REFUND").setParameter("MISSEDCALL", "MISSEDCALL").setParameter("rohan", "7845273233").setParameter("rashmi", "9619283833").setParameter("akshi", "7694848781").getResultList();
+            results = (ArrayList)this.bookingDetailsDao.getEntityManager().createQuery("SELECT UD.createdbyName, COUNT(*), SUM(receivedAmount) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate AND status NOT IN(:CANCEL,:BOOKED,:REQUESTED,:FOLLOWUP,:LOST,:REJECTED,:REFUND,:MISSEDCALL) AND UD.createdBy NOT IN(:rohan,:rashmi,:akshi,:serena) GROUP BY UD.createdbyName ")
+            		.setParameter("currentDate", new Date(), TemporalType.DATE)
+            		.setParameter("lastDate", nextDay, TemporalType.DATE)
+            		.setParameter("CANCEL", "CANCEL")
+            		.setParameter("BOOKED", "BOOKED")
+            		.setParameter("REQUESTED", "REQUESTED")
+            		.setParameter("FOLLOWUP", "FOLLOWUP")
+            		.setParameter("LOST", "LOST")
+            		.setParameter("REJECTED", "REJECTED")
+            		.setParameter("REFUND", "REFUND")
+            		.setParameter("MISSEDCALL", "MISSEDCALL")
+            		.setParameter("rohan", "7845273233")
+            		.setParameter("rashmi", "9619283833")
+            		.setParameter("akshi", "7694848781")
+            		.setParameter("serena", "7718858883")
+            		.getResultList();
             return results;
          }
 
          if (bookingRequest.getRequestFor().equalsIgnoreCase("FOLLOWUP")) {
             new ArrayList();
-            results = (ArrayList)this.bookingDetailsDao.getEntityManager().createQuery("SELECT UD.createdbyName, COUNT(*), SUM(receivedAmount) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate AND status NOT IN(:CANCEL,:BOOKED,:REQUESTED,:ENQUIRY,:LOST,:REJECTED,:REFUND,:MISSEDCALL) AND UD.createdBy NOT IN(:rohan,:rashmi,:akshi) GROUP BY UD.createdbyName ").setParameter("currentDate", new Date(), TemporalType.DATE).setParameter("lastDate", nextDay, TemporalType.DATE).setParameter("CANCEL", "CANCEL").setParameter("BOOKED", "BOOKED").setParameter("REQUESTED", "REQUESTED").setParameter("ENQUIRY", "ENQUIRY").setParameter("LOST", "LOST").setParameter("REJECTED", "REJECTED").setParameter("REFUND", "REFUND").setParameter("MISSEDCALL", "MISSEDCALL").setParameter("rohan", "7845273233").setParameter("rashmi", "9619283833").setParameter("akshi", "7694848781").getResultList();
+            results = (ArrayList)this.bookingDetailsDao.getEntityManager()
+            		.createQuery("SELECT UD.createdbyName, COUNT(*), SUM(receivedAmount) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate AND status NOT IN(:CANCEL,:BOOKED,:REQUESTED,:ENQUIRY,:LOST,:REJECTED,:REFUND,:MISSEDCALL) AND UD.createdBy NOT IN(:rohan,:rashmi,:akshi,:serena) GROUP BY UD.createdbyName ")
+            		.setParameter("currentDate", new Date(), TemporalType.DATE)
+            		.setParameter("lastDate", nextDay, TemporalType.DATE)
+            		.setParameter("CANCEL", "CANCEL")
+            		.setParameter("BOOKED", "BOOKED")
+            		.setParameter("REQUESTED", "REQUESTED")
+            		.setParameter("ENQUIRY", "ENQUIRY")
+            		.setParameter("LOST", "LOST")
+            		.setParameter("REJECTED", "REJECTED")
+            		.setParameter("REFUND", "REFUND")
+            		.setParameter("MISSEDCALL", "MISSEDCALL")
+            		.setParameter("rohan", "7845273233")
+            		.setParameter("rashmi", "9619283833")
+            		.setParameter("akshi", "7694848781")
+            		.setParameter("serena", "7718858883")
+            		.getResultList();
             return results;
          }
 
          if (bookingRequest.getRequestFor().equalsIgnoreCase("LOST")) {
             new ArrayList();
-            results = (ArrayList)this.bookingDetailsDao.getEntityManager().createQuery("SELECT UD.createdbyName, COUNT(*), SUM(receivedAmount) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate AND status NOT IN(:CANCEL,:BOOKED,:REQUESTED,:ENQUIRY,:FOLLOWUP,:REJECTED,:REFUND,:MISSEDCALL) AND UD.createdBy NOT IN(:rohan,:rashmi,:akshi) GROUP BY UD.createdbyName ").setParameter("currentDate", new Date(), TemporalType.DATE).setParameter("lastDate", nextDay, TemporalType.DATE).setParameter("CANCEL", "CANCEL").setParameter("BOOKED", "BOOKED").setParameter("REQUESTED", "REQUESTED").setParameter("ENQUIRY", "ENQUIRY").setParameter("FOLLOWUP", "FOLLOWUP").setParameter("REJECTED", "REJECTED").setParameter("REFUND", "REFUND").setParameter("MISSEDCALL", "MISSEDCALL").setParameter("rohan", "7845273233").setParameter("rashmi", "9619283833").setParameter("akshi", "7694848781").getResultList();
+            results = (ArrayList)this.bookingDetailsDao.getEntityManager().createQuery("SELECT UD.createdbyName, COUNT(*), SUM(receivedAmount) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate AND status NOT IN(:CANCEL,:BOOKED,:REQUESTED,:ENQUIRY,:FOLLOWUP,:REJECTED,:REFUND,:MISSEDCALL) AND UD.createdBy NOT IN(:rohan,:rashmi,:akshi,:serena) GROUP BY UD.createdbyName ")
+            		.setParameter("currentDate", new Date(), TemporalType.DATE)
+            		.setParameter("lastDate", nextDay, TemporalType.DATE)
+            		.setParameter("CANCEL", "CANCEL")
+            		.setParameter("BOOKED", "BOOKED")
+            		.setParameter("REQUESTED", "REQUESTED")
+            		.setParameter("ENQUIRY", "ENQUIRY")
+            		.setParameter("FOLLOWUP", "FOLLOWUP")
+            		.setParameter("REJECTED", "REJECTED")
+            		.setParameter("REFUND", "REFUND")
+            		.setParameter("MISSEDCALL", "MISSEDCALL")
+            		.setParameter("rohan", "7845273233")
+            		.setParameter("rashmi", "9619283833")
+            		.setParameter("akshi", "7694848781")
+            		.setParameter("serena", "7718858883")
+            		.getResultList();
             return results;
          }
       }
@@ -1104,7 +1365,15 @@ public List<BookingDetails> getBookingDetailsForCall(VehicleRequestObject bookin
       if (bookingRequest.getMemberType().equalsIgnoreCase("SUPER2ADMIN")) {
          if (bookingRequest.getRequestFor().equalsIgnoreCase("CUSTOM")) {
             new ArrayList();
-            results = (ArrayList)this.bookingDetailsDao.getEntityManager().createQuery("SELECT UD.createdbyName, COUNT(*), SUM(receivedAmount) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate AND status NOT IN(:CANCEL,:ENQUIRY,:FOLLOWUP,:LOST,:REJECTED,:REFUND,:MISSEDCALL) GROUP BY UD.createdbyName").setParameter("currentDate", bookingRequest.getFromDate(), TemporalType.DATE).setParameter("lastDate", bookingRequest.getToDate(), TemporalType.DATE).setParameter("CANCEL", "CANCEL").setParameter("ENQUIRY", "ENQUIRY").setParameter("FOLLOWUP", "FOLLOWUP").setParameter("LOST", "LOST").setParameter("REJECTED", "REJECTED").setParameter("REFUND", "REFUND").setParameter("MISSEDCALL", "MISSEDCALL").getResultList();
+            results = (ArrayList)this.bookingDetailsDao.getEntityManager()
+            		.createQuery("SELECT UD.createdbyName, COUNT(*), SUM(receivedAmount) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate AND status NOT IN(:CANCEL,:ENQUIRY,:FOLLOWUP,:LOST,:REJECTED,:REFUND,:MISSEDCALL) GROUP BY UD.createdbyName")
+            		.setParameter("currentDate", bookingRequest.getFromDate(), TemporalType.DATE)
+            		.setParameter("lastDate", bookingRequest.getToDate(), TemporalType.DATE)
+            		.setParameter("CANCEL", "CANCEL").setParameter("ENQUIRY", "ENQUIRY")
+            		.setParameter("FOLLOWUP", "FOLLOWUP").setParameter("LOST", "LOST")
+            		.setParameter("REJECTED", "REJECTED").setParameter("REFUND", "REFUND")
+            		.setParameter("MISSEDCALL", "MISSEDCALL")
+            		.getResultList();
             return results;
          }
 
@@ -1126,7 +1395,7 @@ public List<BookingDetails> getBookingDetailsForCall(VehicleRequestObject bookin
             		.createQuery("SELECT UD.createdbyName, COUNT(*), SUM(receivedAmount) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate AND "
             				+ "status NOT IN(:CANCEL,:ENQUIRY,:FOLLOWUP,:LOST,:REJECTED,:REFUND,:MISSEDCALL) "
 //            				+ "UD.status IN (:REQUESTED,:BOOKED)"
-            				+ "AND UD.createdBy NOT IN(:rohan,:rashmi,:akshi) GROUP BY UD.createdbyName")
+            				+ "AND UD.createdBy NOT IN(:rohan,:rashmi,:akshi,:serena) GROUP BY UD.createdbyName")
             		.setParameter("currentDate", bookingRequest.getFromDate(), TemporalType.DATE)
             		.setParameter("lastDate", bookingRequest.getToDate(), TemporalType.DATE)
 //            		.setParameter("REQUESTED", "REQUESTED")
@@ -1138,19 +1407,51 @@ public List<BookingDetails> getBookingDetailsForCall(VehicleRequestObject bookin
             		.setParameter("rohan", "7845273233")
             		.setParameter("rashmi", "9619283833")
             		.setParameter("akshi", "7694848781")
+            		.setParameter("serena", "7718858883")
+            		
             		.getResultList();
             return results;
          }
 
          if (bookingRequest.getRequestFor().equalsIgnoreCase("TODAY")) {
             new ArrayList();
-            results = (ArrayList)this.bookingDetailsDao.getEntityManager().createQuery("SELECT UD.createdbyName, COUNT(*), SUM(receivedAmount) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate AND status NOT IN(:CANCEL,:ENQUIRY,:FOLLOWUP,:LOST,:REJECTED,:REFUND,:MISSEDCALL) AND UD.createdBy NOT IN(:rohan,:rashmi,:akshi) GROUP BY UD.createdbyName").setParameter("currentDate", new Date(), TemporalType.DATE).setParameter("lastDate", nextDay, TemporalType.DATE).setParameter("CANCEL", "CANCEL").setParameter("ENQUIRY", "ENQUIRY").setParameter("FOLLOWUP", "FOLLOWUP").setParameter("LOST", "LOST").setParameter("REJECTED", "REJECTED").setParameter("REFUND", "REFUND").setParameter("MISSEDCALL", "MISSEDCALL").setParameter("rohan", "7845273233").setParameter("rashmi", "9619283833").setParameter("akshi", "7694848781").getResultList();
+            results = (ArrayList)this.bookingDetailsDao.getEntityManager()
+            		.createQuery("SELECT UD.createdbyName, COUNT(*), SUM(receivedAmount) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate AND status NOT IN(:CANCEL,:ENQUIRY,:FOLLOWUP,:LOST,:REJECTED,:REFUND,:MISSEDCALL) AND UD.createdBy NOT IN(:rohan,:rashmi,:akshi,:serena) GROUP BY UD.createdbyName")
+            		.setParameter("currentDate", new Date(), TemporalType.DATE)
+            		.setParameter("lastDate", nextDay, TemporalType.DATE)
+            		.setParameter("CANCEL", "CANCEL")
+            		.setParameter("ENQUIRY", "ENQUIRY")
+            		.setParameter("FOLLOWUP", "FOLLOWUP")
+            		.setParameter("LOST", "LOST")
+            		.setParameter("REJECTED", "REJECTED")
+            		.setParameter("REFUND", "REFUND")
+            		.setParameter("MISSEDCALL", "MISSEDCALL")
+            		.setParameter("rohan", "7845273233")
+            		.setParameter("rashmi", "9619283833")
+            		.setParameter("akshi", "7694848781")
+            		.setParameter("serena", "7718858883")
+            		.getResultList();
             return results;
          }
 
          if (bookingRequest.getRequestFor().equalsIgnoreCase("YESTERDAY")) {
             new ArrayList();
-            results = (ArrayList)this.bookingDetailsDao.getEntityManager().createQuery("SELECT UD.createdbyName, COUNT(*), SUM(receivedAmount) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate AND status NOT IN(:CANCEL,:ENQUIRY,:FOLLOWUP,:LOST,:REJECTED,:REFUND,:MISSEDCALL) AND UD.createdBy NOT IN(:rohan,:rashmi,:akshi) GROUP BY UD.createdbyName").setParameter("currentDate", previousDay, TemporalType.DATE).setParameter("lastDate", new Date(), TemporalType.DATE).setParameter("CANCEL", "CANCEL").setParameter("ENQUIRY", "ENQUIRY").setParameter("FOLLOWUP", "FOLLOWUP").setParameter("LOST", "LOST").setParameter("REJECTED", "REJECTED").setParameter("REFUND", "REFUND").setParameter("MISSEDCALL", "MISSEDCALL").setParameter("rohan", "7845273233").setParameter("rashmi", "9619283833").setParameter("akshi", "7694848781").getResultList();
+            results = (ArrayList)this.bookingDetailsDao.getEntityManager()
+            		.createQuery("SELECT UD.createdbyName, COUNT(*), SUM(receivedAmount) FROM BookingDetails UD where UD.createdAt BETWEEN :currentDate AND :lastDate AND status NOT IN(:CANCEL,:ENQUIRY,:FOLLOWUP,:LOST,:REJECTED,:REFUND,:MISSEDCALL) AND UD.createdBy NOT IN(:rohan,:rashmi,:akshi,:serena) GROUP BY UD.createdbyName")
+            		.setParameter("currentDate", previousDay, TemporalType.DATE)
+            		.setParameter("lastDate", new Date(), TemporalType.DATE)
+            		.setParameter("CANCEL", "CANCEL")
+            		.setParameter("ENQUIRY", "ENQUIRY")
+            		.setParameter("FOLLOWUP", "FOLLOWUP")
+            		.setParameter("LOST", "LOST")
+            		.setParameter("REJECTED", "REJECTED")
+            		.setParameter("REFUND", "REFUND")
+            		.setParameter("MISSEDCALL", "MISSEDCALL")
+            		.setParameter("rohan", "7845273233")
+            		.setParameter("rashmi", "9619283833")
+            		.setParameter("akshi", "7694848781")
+            		.setParameter("serena", "7718858883")
+            		.getResultList();
             return results;
          }
       }
@@ -1159,12 +1460,15 @@ public List<BookingDetails> getBookingDetailsForCall(VehicleRequestObject bookin
    }
 
    public List<BookingDetailsHistory> getUpdateBookingDetailsHistory(VehicleRequestObject bookingRequest) {
-      List<BookingDetailsHistory> results = this.bookingDetailsDao.getEntityManager().createQuery("SELECT UD FROM BookingDetailsHistory UD where UD.bookingDetailsId =:bookingDetailsId ORDER BY UD.createdAt ASC").setParameter("bookingDetailsId", bookingRequest.getBookingDetailsId()).getResultList();
+      List<BookingDetailsHistory> results = this.bookingDetailsDao.getEntityManager()
+    		  .createQuery("SELECT UD FROM BookingDetailsHistory UD where UD.bookingDetailsId =:bookingDetailsId ORDER BY UD.createdAt ASC")
+    		  .setParameter("bookingDetailsId", bookingRequest.getBookingDetailsId()).getResultList();
       return results;
    }
 
    public List<BookingDetails> enqiryDetails(VehicleRequestObject bookingRequest) {
-      List<BookingDetails> results = this.bookingDetailsDao.getEntityManager().createQuery("SELECT UD FROM BookingDetails UD where UD.status =:status ORDER BY UD.createdAt DESC").setParameter("status", "ENQUIRY").getResultList();
+      List<BookingDetails> results = this.bookingDetailsDao.getEntityManager()
+    		  .createQuery("SELECT UD FROM BookingDetails UD where UD.status =:status ORDER BY UD.createdAt DESC").setParameter("status", "ENQUIRY").getResultList();
       return results;
    }
 
@@ -1257,8 +1561,22 @@ public List<BookingDetails> getBookingDetailsForCall(VehicleRequestObject bookin
    }
 
    public List<Object[]> getBonusDetails(VehicleRequestObject bookingRequest, Date firstDate, Date lastDate) {
-      List<Object[]> results = this.bookingDetailsDao.getEntityManager().createQuery("SELECT \n    bd.createdbyName AS createdbyName, \n    COUNT(*) AS totalCount, \n    SUM(bd.receivedAmount) AS receivedAmount,\n    (\n        SELECT bs.bonusAmount\n        FROM BonusSlab bs\n        WHERE SUM(bd.receivedAmount) >= bs.startAmount \n        AND SUM(bd.receivedAmount) <= bs.endAmount AND bs.bonusType = :bonusType\n    ) AS bonusAmount\nFROM \n    BookingDetails bd\nWHERE \n    bd.createdAt BETWEEN :currentDate AND :lastDate\n    AND bd.status NOT IN (:CANCEL,:ENQUIRY,:FOLLOWUP,:LOST,:REJECTED,:REFUND,:MISSEDCALL) \n    AND bd.createdBy NOT IN(:rohan,:rashmi,:akshi)\nGROUP BY \n    bd.createdbyName").setParameter("currentDate", firstDate, TemporalType.DATE).setParameter("lastDate", lastDate, TemporalType.DATE).setParameter("bonusType", bookingRequest.getBonusType()).setParameter("CANCEL", "CANCEL").setParameter("ENQUIRY", "ENQUIRY").setParameter("FOLLOWUP", "FOLLOWUP").setParameter("LOST", "LOST").setParameter("REJECTED", "REJECTED").setParameter("REFUND", "REFUND").setParameter("MISSEDCALL", "MISSEDCALL").setParameter("rohan", "7845273233").setParameter("rashmi", "9619283833").setParameter("akshi", "7694848781").getResultList();
-      System.out.println(firstDate + " , " + lastDate + " , " + bookingRequest.getBonusType() + "  hhuh");
+      List<Object[]> results = this.bookingDetailsDao.getEntityManager().createQuery("SELECT bd.createdbyName AS createdbyName, COUNT(*) AS totalCount, \n    SUM(bd.receivedAmount) AS receivedAmount,\n    (\n        SELECT bs.bonusAmount\n        FROM BonusSlab bs\n        WHERE SUM(bd.receivedAmount) >= bs.startAmount \n        AND SUM(bd.receivedAmount) <= bs.endAmount AND bs.bonusType = :bonusType\n    ) AS bonusAmount\nFROM \n    BookingDetails bd\nWHERE \n    bd.createdAt BETWEEN :currentDate AND :lastDate\n    AND bd.status NOT IN (:CANCEL,:ENQUIRY,:FOLLOWUP,:LOST,:REJECTED,:REFUND,:MISSEDCALL) \n    AND bd.createdBy NOT IN(:rohan,:rashmi,:akshi,:serena)\nGROUP BY \n    bd.createdbyName")
+    		  .setParameter("currentDate", firstDate, TemporalType.DATE)
+    		  .setParameter("lastDate", lastDate, TemporalType.DATE)
+    		  .setParameter("bonusType", bookingRequest.getBonusType())
+    		  .setParameter("CANCEL", "CANCEL")
+    		  .setParameter("ENQUIRY", "ENQUIRY")
+    		  .setParameter("FOLLOWUP", "FOLLOWUP")
+    		  .setParameter("LOST", "LOST")
+    		  .setParameter("REJECTED", "REJECTED")
+    		  .setParameter("REFUND", "REFUND")
+    		  .setParameter("MISSEDCALL", "MISSEDCALL")
+    		  .setParameter("rohan", "7845273233")
+    		  .setParameter("rashmi", "9619283833")
+    		  .setParameter("akshi", "7694848781")
+    		  .setParameter("serena", "7718858883")
+    		  .getResultList();
       return results;
    }
 
@@ -1278,7 +1596,6 @@ public List<BookingDetails> getBookingDetailsForCall(VehicleRequestObject bookin
       }
 
       List<BookingDetails> results = this.bookingDetailsDao.getEntityManager().createQuery("SELECT UD FROM BookingDetails UD WHERE status IN(:ENQUIRY,:FOLLOWUP) AND UD.fromDate =:fromDate ORDER BY UD.deliveryTime ASC").setParameter("ENQUIRY", "ENQUIRY").setParameter("FOLLOWUP", "FOLLOWUP").setParameter("fromDate", nextDay, TemporalType.DATE).getResultList();
-      System.out.println("Date : " + nextDay);
       return results;
    }
 
@@ -1292,7 +1609,7 @@ public List<BookingDetails> getBookingDetailsForCall(VehicleRequestObject bookin
 	      List<BookingDetails> results = bookingDetailsDao.getEntityManager().
 	    		  createQuery("SELECT UD FROM BookingDetails UD where createdBy IN(:Null,:empity) order by UD.id desc")
 	    		  .setParameter("Null", "null")
-	    		  .setParameter("empity", "").getResultList();
+	    		  .setParameter("empity", "").getResultList(); 
 	      return results;
 	   }
 }

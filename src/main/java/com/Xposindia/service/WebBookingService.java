@@ -15,8 +15,8 @@ import com.Xposindia.entities.WebBookingDetails;
 import com.Xposindia.expections.BizException;
 import com.Xposindia.helper.BookingHelper;
 import com.Xposindia.helper.WebBookingHelper;
+import com.Xposindia.object.request.CashfreeRequestObject;
 import com.Xposindia.object.request.PhonePeStatusRequest;
-import com.Xposindia.object.request.PhonePeStatusRequest.PaymentDetail;
 import com.Xposindia.object.request.Request;
 import com.Xposindia.object.request.VehicleRequestObject;
 
@@ -34,6 +34,9 @@ public class WebBookingService {
 	
 	@Autowired
 	private PhonePgService phonePgService;
+	
+	@Autowired
+	private CashfreePgService cashfreePgService;
 	
 	
 
@@ -57,7 +60,13 @@ public class WebBookingService {
 //			phonePgService.getPhonePePaymentUrl(bookingDetails);
 //			String paymentLink = rozarpayPgService.getRozarpayPaymentLink(vehicleRequest);
 
-			vehicleRequest.setPaymentLink(phonePgService.getPhonePePaymentUrl(bookingDetails));
+//			vehicleRequest.setPaymentLink(phonePgService.getPhonePePaymentUrl(bookingDetails));
+			
+//			if(vehicleRequest.getPgType().equals("PHONEPE")) {
+//				vehicleRequest.setPaymentLink(phonePgService.getPhonePePaymentUrl(bookingDetails));
+//			} else {
+//				vehicleRequest.setPaymentLink(cashfreePgService.getCashfreePaymentLink(vehicleRequest, bookingDetails));
+//			}
 
 		}
 
@@ -113,7 +122,25 @@ public class WebBookingService {
 	
 	
 
-
+public CashfreeRequestObject updateCashFreeStatus(Request<CashfreeRequestObject> cashfreeRequestObject) throws BizException, Exception  {
+		
+		CashfreeRequestObject cashfreeRequest = cashfreeRequestObject.getPayload();
+		
+		WebBookingDetails bookingDetails = webBookingHelper.getVehicleDetailsByBookingId(cashfreeRequest.getBookingId());
+		if(bookingDetails != null) {
+			
+//			String status = cashfreePgService.getCashFreePaymentStatus(cashfreeRequest.getBookingId());
+//			
+//			bookingDetails.setStatus(status);
+//        	bookingDetails.setUpdatedAt(new Date());
+//        	webBookingHelper.updateWebBookingDetails(bookingDetails);
+        	 
+//        	cashfreeRequest.setRespCode(200);
+//        	cashfreeRequest.setRespMesg(status);
+//        	cashfreeRequest.setStatus(status);
+		}
+		return cashfreeRequest;
+	}
 
 	
 

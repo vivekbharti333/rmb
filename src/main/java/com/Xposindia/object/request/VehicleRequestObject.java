@@ -136,6 +136,8 @@ public class VehicleRequestObject {
 	private String createdbyName;
 	private double securityDeposit;
 	
+	private String pgType;
+	
 	private Long startAmount;
 	private Long endAmount;
 	private Long bonusAmount;
@@ -190,6 +192,12 @@ public class VehicleRequestObject {
 	}
 	public void setLocation(String location) {
 		this.location = location;
+	}
+	public String getPgType() {
+		return pgType;
+	}
+	public void setPgType(String pgType) {
+		this.pgType = pgType;
 	}
 	public String getUserId() {
 		return userId;
